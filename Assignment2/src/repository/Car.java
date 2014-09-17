@@ -10,7 +10,7 @@ package repository;
  *
  * @author fhj
  */
-public class Car extends Vehicle { //this is a test, asdfkljsdflkjsalkf
+public class Car extends Vehicle { //change made from Comal!!
   
   /**
    * This car's body style.
