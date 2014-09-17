@@ -10,7 +10,7 @@ package repository; //this is another test by Leah lkashdhf
  *
  * @author fhj
  */
-public class Car extends Vehicle { //change made from Comal!!
+public class Car extends Vehicle { //I'm not with Durrett on this!
   
   /**
    * This car's body style.
