@@ -10,7 +10,7 @@ package repository;
  *
  * @author fhj
  */
-public class Car extends Vehicle { //this is a test
+public class Car extends Vehicle { //this is a test, asdfkljsdflkjsalkf
   
   /**
    * This car's body style.
