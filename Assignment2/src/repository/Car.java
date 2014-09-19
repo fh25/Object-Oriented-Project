@@ -4,13 +4,13 @@
  * and open the template in the editor.
  */
 
-package repository; //this is another test by Leah lkashdhf
+package repository; 
 
 /**
  *
  * @author fhj
  */
-public class Car extends Vehicle { //I'm not with Durrett on this!
+public class Car extends Vehicle { 
   
   /**
    * This car's body style.

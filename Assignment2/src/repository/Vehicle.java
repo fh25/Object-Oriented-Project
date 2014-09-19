@@ -50,14 +50,14 @@ public class Vehicle {
   /**
    * ArrayList of type Vehicle.
    */  
-  private static ArrayList<Vehicle> carArray = new ArrayList<>();
+  private static ArrayList<Vehicle> vehicleArray = new ArrayList<>();
     
   /**
    * Returns the ArrayList object of type Vehicle
    * @return this ArrayList of type Vehicle
    */  
-  public static ArrayList<Vehicle> getCarArray() {
-    return carArray;
+  public static ArrayList<Vehicle> getVehicleArray() {
+    return vehicleArray;
   }
   
   /**
@@ -106,24 +106,26 @@ public class Vehicle {
     
   /**
    * Creates a temporary object of type Vehicle, setting the values with the given parameters.
-   * @param carVin  the Vehicle license plate number.
-   * @param carMake  the make of the Vehicle.
-   * @param carModel  the model of the Vehicle.
-   * @param carYear  the year of the Vehicle.
-   * @param carPrice  the price of the Vehicle.
+   * @param vehicleVin  the Vehicle license plate number.
+   * @param vehicleMake  the make of the Vehicle.
+   * @param vehicleModel  the model of the Vehicle.
+   * @param vehicleYear  the year of the Vehicle.
+   * @param vehicleMileage the mileage of the Vehicle.
+   * @param vehiclePrice  the price of the Vehicle.
    */
-  public void addToArray ( String carVin, String carMake, String carModel, 
-    int carYear, float carPrice) {
+  public void addToArray (String vehicleVin, String vehicleMake, 
+                          String vehicleModel, int vehicleYear, 
+                          int vehicleMileage, float vehiclePrice) {
     
     Vehicle temp = new Vehicle ();
     
-    temp.vin = carVin;
-    temp.make  = carMake;
-    temp.model = carModel;
-    temp.year  = carYear;
-    temp.price = carPrice;
+    temp.vin = vehicleVin;
+    temp.make  = vehicleMake;
+    temp.model = vehicleModel;
+    temp.year  = vehicleYear;
+    temp.price = vehiclePrice;
     
-    carArray.add( temp );
+    vehicleArray.add( temp );
   }
     
   /**
@@ -133,14 +135,14 @@ public class Vehicle {
   public void printRecords () { 
     int i = 0;
     
-    System.out.printf( "Record  " + "License Plate  " + "  Manufacturer    "  
+    System.out.printf("Record  " + "VIN Number  " + "  Manufacturer    "  
                       + " Model    " + "    Year  " + "     Price\n" );
         
-      for ( Vehicle c : Vehicle.getCarArray() ) {
-        System.out.printf( "  %d   \t", ++i );
-        System.out.printf( "   %-7s\t" + "  %-10s\t" + "  %-10s" + "   %4d " 
+      for (Vehicle c : Vehicle.getVehicleArray()) {
+        System.out.printf("  %d   \t", ++i );
+        System.out.printf("   %-7s\t" + "  %-10s\t" + "  %-10s" + "   %4d " 
                           + "   $%,10.2f\n", c.getVin(), c.getMake(), 
-                          c.getModel(), c.getYear(), c.getPrice() );
+                          c.getModel(), c.getYear(), c.getPrice());
       }      
   }
     
@@ -152,7 +154,7 @@ public class Vehicle {
   public void saveData () throws Exception {
         
     try (PrintWriter outFile = new PrintWriter("cars.txt")) {
-      for ( Vehicle c : Vehicle.getCarArray() ) {
+      for ( Vehicle c : Vehicle.getVehicleArray() ) {
         outFile.println(c);
       }
             

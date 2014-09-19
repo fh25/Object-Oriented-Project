@@ -25,7 +25,7 @@ public class Console {
     /**
      * @Scanner reads car data from file "cars.txt"
      */    
-    Scanner in = new Scanner(new FileReader("cars.txt"));
+    Scanner in = new Scanner(System.in);//(new FileReader("cars.txt"));
         
     /**
      * Vehicle VIN number.
@@ -60,12 +60,12 @@ public class Console {
     /**
      * new object of type Truck
      */
-    //Truck truck = new Truck ();
+    Truck truck = new Truck ();
     
     /**
      * new object of type Motorcycle
      */
-    //Motorcycle bike = new Motorcycle ();
+    Motorcycle bike = new Motorcycle ();
         
     /**
      * new object of type Input
@@ -106,22 +106,22 @@ public class Console {
       switch (choice) {
         case '1':
           do {
-          option = vehicleChoice( in );
-          switch (option) {
-            case '1': 
-              input.addRecord( in, car ); 
-              break;
-            case '2':
-              //input.addRecord( in, truck );
-              break;
-            case '3':
-              //input.addRecord( in, bike ); 
-              break;
-            case '4':
-              break;
-            default : 
-              System.out.printf( "Not a valid option%n", option );
-          }
+            option = vehicleChoice( in );
+            switch (option) {
+              case '1': 
+                input.addRecord( in, car, option ); 
+                break;
+              case '2':
+                input.addRecord( in, truck, option );
+                break;
+              case '3':
+                input.addRecord( in, bike, option ); 
+                break;
+              case '4':
+                break;
+              default : 
+                System.out.printf( "Not a valid option%n", option );
+            }
           } while ( option != '4' );
           break;
         case '2':  
@@ -131,7 +131,7 @@ public class Console {
           //record.printRecords();
           break;
         case '4':  
-          input.priceRange( in );//input.searchRecords( in );
+          //input.priceRange( in );//input.searchRecords( in );
           break;
         case '5':  
           
@@ -185,11 +185,12 @@ public class Console {
   
   public static int vehicleChoice( Scanner in ) {
     in = new Scanner(System.in);
-    System.out.print( "\nChoose Vehicle type to add: \n"
+    System.out.print( "\nChoose Vehicle Type: \n"
                      + "\t1. Car\n"
                      + "\t2. Truck\n"
                      + "\t3. Motorcycle\n"
-                     + "\t4. Exit program.\n");
+                     + "\t4. Back to Main Menu.\n"
+                     + "Your choice: ");
     
     char selection = in.next().charAt(0);
     
