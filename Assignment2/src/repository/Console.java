@@ -28,34 +28,44 @@ public class Console {
     Scanner in = new Scanner(new FileReader("cars.txt"));
         
     /**
-     * license plate number.
+     * Vehicle VIN number.
      */ 
-    String carPlate;
+    String vehicleVin;
         
     /**
-     *  make of a car.
+     *  The make of the vehicle.
      */    
-    String carMake;
+    String vehicleMake;
         
     /**
-     *  model of a car.
+     *  The model of the vehicle.
      */    
-    String carModel;
+    String vehicleModel;
         
     /**
-     *  year of a car.
+     *  The year of the vehicle.
      */   
-    int carYear;
+    int vehicleYear;
         
     /**
-     *  price of a car.
+     *  The price of the vehicle.
      */
-    float carPrice; 
+    float vehiclePrice; 
         
     /**
      * new object of type Car       
      */
-    Vehicle record = new Vehicle ();
+    Car car = new Car ();
+    
+    /**
+     * new object of type Truck
+     */
+    //Truck truck = new Truck ();
+    
+    /**
+     * new object of type Motorcycle
+     */
+    //Motorcycle bike = new Motorcycle ();
         
     /**
      * new object of type Input
@@ -65,20 +75,28 @@ public class Console {
     /**
      *  integer variable to hold user input
      */
-    int choice;      
-        
+    int choice;
+    
+    /**
+     *  integer variable to hold user vehicle choice
+     */
+    int option;
+    
+    /* Omitting for now to test adding a vehicle, no criteria established
+    yet on how to determine a Car from a Truck from a Motorcycle
     while ( in.hasNextLine() ) {
       String line = in.nextLine();
       String [] data = line.split(" ");
-      carPlate = data[0];
-      carMake = data[1];
-      carModel = data[2];
-      carYear = Integer.parseInt(data[3]);
-      carPrice = Float.parseFloat(data[4]);
-      record.addToArray(carPlate, carMake, carModel, carYear, carPrice);
+      vehicleVin = data[0];
+      vehicleMake = data[1];
+      vehicleModel = data[2];
+      vehicleYear = Integer.parseInt(data[3]);
+      vehiclePrice = Float.parseFloat(data[4]);
+      record.addToArray(vehicleVin, vehicleMake, vehicleModel, vehicleYear, vehiclePrice);
     }
         
     in.close();
+    */
         
     do {
       printMenu();
@@ -86,14 +104,31 @@ public class Console {
       choice = userChoice( in );
         
       switch (choice) {
-        case '1':  
-          input.addRecord( in, record ); 
+        case '1':
+          do {
+          option = vehicleChoice( in );
+          switch (option) {
+            case '1': 
+              input.addRecord( in, car ); 
+              break;
+            case '2':
+              //input.addRecord( in, truck );
+              break;
+            case '3':
+              //input.addRecord( in, bike ); 
+              break;
+            case '4':
+              break;
+            default : 
+              System.out.printf( "Not a valid option%n", option );
+          }
+          } while ( option != '4' );
           break;
         case '2':  
-          input.deleteRecord( in, record );
+          //input.deleteRecord( in, record );
           break;
         case '3':  
-          record.printRecords();
+          //record.printRecords();
           break;
         case '4':  
           input.priceRange( in );//input.searchRecords( in );
@@ -146,5 +181,18 @@ public class Console {
     char command = in.next().charAt(0);
 
     return command;
+  }
+  
+  public static int vehicleChoice( Scanner in ) {
+    in = new Scanner(System.in);
+    System.out.print( "\nChoose Vehicle type to add: \n"
+                     + "\t1. Car\n"
+                     + "\t2. Truck\n"
+                     + "\t3. Motorcycle\n"
+                     + "\t4. Exit program.\n");
+    
+    char selection = in.next().charAt(0);
+    
+    return selection;
   }
 }
