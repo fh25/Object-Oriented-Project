@@ -70,7 +70,7 @@ public class Console {
     /**
      * new object of type Input
      */
-    Input input = new Input();        
+    Input input = new Input ();        
         
     /**
      *  integer variable to hold user input
@@ -99,30 +99,30 @@ public class Console {
     */
         
     do {
-      printMenu();
+      printMenu ();
         
-      choice = userChoice( in );
+      choice = userChoice  (in);
         
       switch (choice) {
         case '1':
           do {
-            option = vehicleChoice( in );
+            option = vehicleChoice (in);
             switch (option) {
               case '1': 
-                input.addRecord( in, car, option ); 
+                input.addRecord (in, car, option); 
                 break;
               case '2':
-                input.addRecord( in, truck, option );
+                input.addRecord (in, truck, option);
                 break;
               case '3':
-                input.addRecord( in, bike, option ); 
+                input.addRecord (in, bike, option); 
                 break;
               case '4':
                 break;
               default : 
-                System.out.printf( "Not a valid option%n", option );
+                System.out.printf("Not a valid option%n", option);
             }
-          } while ( option != '4' );
+          } while (option != '4');
           break;
         case '2':  
           //input.deleteRecord( in, record );
@@ -146,18 +146,17 @@ public class Console {
         case '9':
           break;
         default: 
-          System.out.printf( "Not a valid option%n", choice );
+          System.out.printf("Not a valid option%n", choice);
       }
-        
-    } while ( choice != '9' );
+    } while (choice != '9');
   }
     
   /**
    * Prints a menu out to the console.
    */   
-  public static void printMenu() {
-    System.out.print( "\n" );
-    System.out.print( "Choose one of the following:\n" 
+  public static void printMenu () {
+    System.out.print("\n");
+    System.out.print("Choose one of the following:\n" 
                      + "\t1. Add a new vehicle to the database.\n"
                      + "\t2. Delete a vehicle from a database (by VIN)\n"
                      + "\t3. Show all existing vehicles in the database.\n"
@@ -174,18 +173,18 @@ public class Console {
    * @param in reusing Scanner in object
    * @return user input read by Scanner, an integer value between 1 and 6
    */
-  public static int userChoice( Scanner in ) {
+  public static int userChoice(Scanner in) {
     in = new Scanner(System.in);
-    System.out.print( "Your choice: " );
+    System.out.print("Your choice: ");
 
     char command = in.next().charAt(0);
 
     return command;
   }
   
-  public static int vehicleChoice( Scanner in ) {
+  public static int vehicleChoice(Scanner in) {
     in = new Scanner(System.in);
-    System.out.print( "\nChoose Vehicle Type: \n"
+    System.out.print("\nChoose Vehicle Type: \n"
                      + "\t1. Car\n"
                      + "\t2. Truck\n"
                      + "\t3. Motorcycle\n"
