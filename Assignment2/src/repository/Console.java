@@ -1,7 +1,9 @@
 package repository;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.Scanner;
-import java.io.FileReader;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,12 +23,27 @@ public class Console {
    * @throws Exception
    */ 
   public static void main (String[] args) throws Exception {   	 
-        
+    
+    try {
+      FileInputStream fileIn = new FileInputStream("dealership.txt");
+      ObjectInputStream in = new ObjectInputStream(fileIn);
+      Vehicle v;
+      /* Need to read from file in loop then write to array
+      for (Vehicle c : Vehicle.getVehicleArray()) {
+        v = (Vehicle) in.readObject();
+        System.out.println(v);
+      }
+      */
+    } catch (IOException ioException) {
+      System.err.println("Error opening file. Try adding data then exit using "
+                         + "menu option 9.");
+    }
+    
     /**
      * @Scanner reads car data from file "cars.txt"
      */    
     Scanner in = new Scanner(System.in);//(new FileReader("cars.txt"));
-        
+   
     /**
      * Vehicle VIN number.
      */ 
@@ -46,11 +63,20 @@ public class Console {
      *  The year of the vehicle.
      */   
     int vehicleYear;
+    
+    /**
+     * The mileage of the vehicle.
+     */
+    int vehicleMileage;
         
     /**
      *  The price of the vehicle.
      */
     float vehiclePrice; 
+    
+    
+    //experiment
+    Vehicle vehicle = new Vehicle ();
         
     /**
      * new object of type Car       
@@ -82,8 +108,8 @@ public class Console {
      */
     int option;
     
-    /* Omitting for now to test adding a vehicle, no criteria established
-    yet on how to determine a Car from a Truck from a Motorcycle
+    /*Omitting for now to test adding a vehicle, no criteria established
+    //yet on how to determine a Car from a Truck from a Motorcycle
     while ( in.hasNextLine() ) {
       String line = in.nextLine();
       String [] data = line.split(" ");
@@ -92,10 +118,11 @@ public class Console {
       vehicleModel = data[2];
       vehicleYear = Integer.parseInt(data[3]);
       vehiclePrice = Float.parseFloat(data[4]);
-      record.addToArray(vehicleVin, vehicleMake, vehicleModel, vehicleYear, vehiclePrice);
+      car.addToArray(vehicleVin, vehicleMake, vehicleModel, vehicleYear, 
+                     vehicleMileage, vehiclePrice);
     }
         
-    in.close();
+    fileOut.close();
     */
         
     do {
@@ -128,7 +155,7 @@ public class Console {
           //input.deleteRecord( in, record );
           break;
         case '3':  
-          //record.printRecords();
+          vehicle.printRecords();
           break;
         case '4':  
           //input.priceRange( in );//input.searchRecords( in );
@@ -137,13 +164,14 @@ public class Console {
           
           break;
         case '6':  
-          //record.saveData();
+          
           break;
         case '7':
           break;
         case '8':
           break;
         case '9':
+          vehicle.saveData();
           break;
         default: 
           System.out.printf("Not a valid option%n", choice);

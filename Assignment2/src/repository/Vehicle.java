@@ -1,8 +1,10 @@
 package repository;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.io.PrintWriter;
-import java.lang.Object;
+import java.io.Serializable;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,7 +17,7 @@ import java.lang.Object;
  model, year, and price.
  * @author Fernando Herrera and Leah Weiland
  */
-public class Vehicle {
+public class Vehicle implements Serializable {
 
   /**
   * This vehicle's VIN plate number.
@@ -59,6 +61,12 @@ public class Vehicle {
   public static ArrayList<Vehicle> getVehicleArray() {
     return vehicleArray;
   }
+
+  public static void setVehicleArray(ArrayList<Vehicle> vehicleArray) {
+    Vehicle.vehicleArray = vehicleArray;
+  }
+  
+  
   
   /**
    * Returns the VIN number represented by this Vehicle object.
@@ -127,11 +135,14 @@ public class Vehicle {
     
     vehicleArray.add( temp );
   }
+  
+  public void addObject (Vehicle temp) {
+    vehicleArray.add(temp);
+  }
     
   /**
    *  Prints to the console the attributes of type Vehicle stored in an ArrayList.
    */
-    
   public void printRecords () { 
     int i = 0;
     
@@ -150,9 +161,9 @@ public class Vehicle {
    * Writes data stored in ArrayList to file "cars.txt"
    * @throws Exception - file not found exception
    */
-    
   public void saveData () throws Exception {
-        
+     
+    /*experimenting for Serialization of output file
     try (PrintWriter outFile = new PrintWriter("cars.txt")) {
       for ( Vehicle c : Vehicle.getVehicleArray() ) {
         outFile.println(c);
@@ -160,13 +171,33 @@ public class Vehicle {
             
       System.out.print("Data saved.\n");
     }
+    */
+    
+    /**
+     * 
+     */
+    try {
+      FileOutputStream fileOut = new FileOutputStream("dealership.txt");
+      ObjectOutputStream out = new ObjectOutputStream(fileOut);
+      
+      for ( Vehicle c : Vehicle.getVehicleArray() ) {
+        out.writeObject(c);
+      }
+      
+      fileOut.close();
+      
+    } catch (IOException ioException) {
+      System.err.println("Error openeing file. Terminating.");
+      System.exit(1); 
+    }
+   
+    System.out.print("Data saved.\n");
   }
 
   /**
    * Converts and returns this Vehicle object to a formatted String.
    * @return a String representation of this Vehicle.
    */
-    
   @Override
   public String toString () {
     return ( vin + " " + make + " " + model + " " + year + " " + price );   

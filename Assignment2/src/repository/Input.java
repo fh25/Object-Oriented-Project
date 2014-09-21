@@ -1,7 +1,6 @@
 package repository;
 
 import java.util.Scanner;
-import java.lang.Object;
 
 /**
  * Class Input provides methods to add, delete, and search records of an
@@ -23,7 +22,7 @@ public class Input {
   public void addRecord(Scanner in, Vehicle temp, int option) {
     in = new Scanner(System.in);
     boolean flag = false;
-    int minYear = 1950;
+    int minYear = 1949;
     int maxYear = 2017;
     String vin, 
            make, 
@@ -69,7 +68,7 @@ public class Input {
           mileage = in.nextInt();
         } 
         
-        if (mileage > 0) {
+        if (mileage > -1) {
           flag = true;
         }
     } while (!(flag));
