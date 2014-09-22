@@ -103,14 +103,14 @@ public class Input {
     in = new Scanner(System.in);
     int i = 0;
 
-    System.out.print("Enter license plate to delete record: ");
+    System.out.print("Enter VIN # to delete record: ");
     String key = in.next();
 
     for (Vehicle c : Vehicle.getVehicleArray()) {
 
       if (c.getVin().equalsIgnoreCase(key)) {
         Vehicle.getVehicleArray().remove(i);
-        System.out.printf("Record containing plate # %s removed.", key);
+        System.out.printf("Record containing VIN # %s removed.", key);
         System.out.print("\n");
         return;
       }
@@ -118,7 +118,7 @@ public class Input {
       ++i;
     }
     
-    System.out.println("Record Not Found.");
+    System.out.printf("Record with VIN # %s Not Found.\n", key);
 
   }
 
