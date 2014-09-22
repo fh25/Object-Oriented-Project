@@ -22,14 +22,19 @@ public class Input {
   public void addRecord(Scanner in, Vehicle temp, int option) {
     in = new Scanner(System.in);
     boolean flag = false;
-    int minYear = 1949;
-    int maxYear = 2017;
+    int minYear = 1949,
+        maxYear = 2017,
+        displacement = 0;
     String vin, 
            make, 
-           model;
+           model,
+           style,
+           type;
     int year = 0, 
         mileage = 0;
-    float price = 0;
+    float price = 0,
+          loadWeight = 0,
+          length = 0;
 
     System.out.print("\nEnter 5 character VIN number: ");
     vin = in.next();
@@ -45,7 +50,7 @@ public class Input {
     make = in.next();
 
     System.out.print("Enter model: ");
-    model = in.next();
+    model = in.nextLine();
 
     do {
       System.out.print("Enter year between 1950-2016: ");
@@ -86,6 +91,104 @@ public class Input {
           in.next();
         }
     } while (!(flag));
+    
+    flag = false;
+    
+    if (option == '1') {
+      
+      System.out.print("\nSelect body style:\n"
+                     + "\t1. Coupe\n"
+                     + "\t2. Sedan\n"
+                     + "\t3. Mini-Van\n"
+                     + "\t4. SUV\n"
+                     + "Your choice: ");
+    
+      char selection = in.next().charAt(0);
+    
+        do {
+          switch (selection) {
+            case '1': 
+              style = "Coupe"; 
+              break;
+            case '2':
+              style = "Sedan";
+              break;
+            case '3':
+              style = "Mini-Van"; 
+              break;
+            case '4':
+              style = "SUV";
+              break;
+            case '5':
+              break;
+            default : 
+              System.out.printf("Not a valid option%n", selection);
+          }
+        } while (selection != '5');
+        
+    } else if (option == '2') {
+      
+      do {
+        System.out.print("\nEnter maximum load weight (min 2800): ");
+
+        if (in.hasNextFloat()) {
+          loadWeight = in.nextFloat();  
+        } 
+        
+        if (loadWeight >= 2800) {
+          flag = true;
+        }
+        
+      } while (!(flag));
+      
+      flag = false;
+      
+      do {
+        System.out.print("\nEnter truck length in feet (min 12ft): ");
+
+        if (in.hasNextFloat()) {
+          length = in.nextFloat();  
+        } 
+        
+        if (length >= 12) {
+          flag = true;
+        }
+        
+      } while (!(flag));
+      
+    } else if (option == '3') {
+      
+      System.out.print("\nSelect body style:\n"
+                     + "\t1. Coupe\n"
+                     + "\t2. Sedan\n"
+                     + "\t3. Mini-Van\n"
+                     + "\t4. SUV\n"
+                     + "Your choice: ");
+    
+      char selection = in.next().charAt(0);
+    
+        do {
+          switch (selection) {
+            case '1': 
+              style = "Coupe"; 
+              break;
+            case '2':
+              style = "Sedan";
+              break;
+            case '3':
+              style = "Mini-Van"; 
+              break;
+            case '4':
+              style = "SUV";
+              break;
+            case '5':
+              break;
+            default : 
+              System.out.printf("Not a valid option%n", selection);
+          }
+        } while (selection != '5');
+      
+    }
 
     temp.addToArray(vin, make, model, year, mileage, price);
 

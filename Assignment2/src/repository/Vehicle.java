@@ -66,8 +66,6 @@ public class Vehicle implements Serializable {
     Vehicle.vehicleArray = vehicleArray;
   }
   
-  
-  
   /**
    * Returns the VIN number represented by this Vehicle object.
    * @return this object's license plate number

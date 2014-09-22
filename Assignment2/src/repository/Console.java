@@ -17,6 +17,9 @@ import java.util.Scanner;
  */
 public class Console {	
   
+  /**
+   * @ObjectInputStream used to read from a file
+   */
   private static ObjectInputStream in;
   
   /**
@@ -31,41 +34,10 @@ public class Console {
     closeFile();
 
     /**
-     * @Scanner reads car data from file "cars.txt"
+     * @Scanner reads car data from file "dealership.txt"
      */    
-    Scanner in = new Scanner(System.in);//(new FileReader("cars.txt"));
+    Scanner in = new Scanner(System.in);
    
-    /**
-     * Vehicle VIN number.
-     */ 
-    String vehicleVin;
-        
-    /**
-     *  The make of the vehicle.
-     */    
-    String vehicleMake;
-        
-    /**
-     *  The model of the vehicle.
-     */    
-    String vehicleModel;
-        
-    /**
-     *  The year of the vehicle.
-     */   
-    int vehicleYear;
-    
-    /**
-     * The mileage of the vehicle.
-     */
-    int vehicleMileage;
-        
-    /**
-     *  The price of the vehicle.
-     */
-    float vehiclePrice; 
-    
-    
     //experiment
     Vehicle vehicle = new Vehicle ();
         
@@ -102,7 +74,7 @@ public class Console {
     do {
       printMenu ();
         
-      choice = userChoice  (in);
+      choice = userChoice (in);
         
       switch (choice) {
         case '1':
