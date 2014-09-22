@@ -150,8 +150,8 @@ public class Vehicle implements Serializable {
                       + " Model    " + "    Year  " + "     Price\n" );
         
       for (Vehicle c : Vehicle.getVehicleArray()) {
-        System.out.printf("  %d   \t", ++i );
-        System.out.printf("   %-7s\t" + "  %-10s\t" + "  %-10s" + "   %4d " 
+        System.out.printf("  %d    ", ++i );
+        System.out.printf("   %-7s       " + "%-10s     " + "%-10s" + "   %4d " 
                           + "   $%,10.2f\n", c.getVin(), c.getMake(), 
                           c.getModel(), c.getYear(), c.getPrice());
       }      

@@ -16,7 +16,9 @@ import java.util.Scanner;
  * @author Fernando Herrera and Leah Weiland
  */
 public class Console {	
-    
+  
+  private static ObjectInputStream in;
+  
   /**
    * Class Console creates and displays an interactive menu for the user.
    * @param args
@@ -24,29 +26,10 @@ public class Console {
    */ 
   public static void main (String[] args) throws Exception {   	 
     
-    try {
-      //FileInputStream fileIn = new FileInputStream("dealership.txt");
-      ObjectInputStream in = new ObjectInputStream(new FileInputStream("dealership.txt"));
-      Vehicle v;
-      
-      for (int i = 0; i < 1; ++i) {
-        v = (Vehicle) in.readObject();
-        System.out.println(v);
-      }
-      
-      in.close();
-        
-      /* Need to read from file in loop then write to array
-      for (Vehicle c : Vehicle.getVehicleArray()) {
-        v = (Vehicle) in.readObject();
-        System.out.println(v);
-      }
-      */
-    } catch (IOException ioException) {
-      System.err.println("Error opening file. Try adding data then exit using "
-                         + "menu option 9.");
-    }
-    
+    openFile();
+    readFile();
+    closeFile();
+
     /**
      * @Scanner reads car data from file "cars.txt"
      */    
@@ -115,23 +98,6 @@ public class Console {
      *  integer variable to hold user vehicle choice
      */
     int option;
-    
-    /*Omitting for now to test adding a vehicle, no criteria established
-    //yet on how to determine a Car from a Truck from a Motorcycle
-    while ( in.hasNextLine() ) {
-      String line = in.nextLine();
-      String [] data = line.split(" ");
-      vehicleVin = data[0];
-      vehicleMake = data[1];
-      vehicleModel = data[2];
-      vehicleYear = Integer.parseInt(data[3]);
-      vehiclePrice = Float.parseFloat(data[4]);
-      car.addToArray(vehicleVin, vehicleMake, vehicleModel, vehicleYear, 
-                     vehicleMileage, vehiclePrice);
-    }
-        
-    fileOut.close();
-    */
         
     do {
       printMenu ();
@@ -160,7 +126,7 @@ public class Console {
           } while (option != '4');
           break;
         case '2':  
-          //input.deleteRecord( in, record );
+          input.deleteRecord( in, vehicle );
           break;
         case '3':  
           vehicle.printRecords();
@@ -230,5 +196,38 @@ public class Console {
     char selection = in.next().charAt(0);
     
     return selection;
+  }
+  
+  public static void openFile() {
+    try {
+      in = new ObjectInputStream(new FileInputStream("dealership.txt")); 
+      
+    } catch (IOException ioException) {
+      System.err.println("Error opening file. Try adding data then exit using "
+                         + "menu option 9.");
+    }
+  }
+  
+  public static void readFile() throws ClassNotFoundException {
+    Vehicle v;
+    
+    try {
+      while (true) {
+        v = (Vehicle) in.readObject();
+        System.out.println(v); //printing for test purposes
+        v.addObject(v);
+      }
+    } catch (IOException ioException) {
+      
+    }
+  }
+  
+  public static void closeFile() {
+    try {
+      if (in != null)
+        in.close();
+    } catch (IOException ioException) {
+      System.err.println("Error closing file.");
+    }
   }
 }
