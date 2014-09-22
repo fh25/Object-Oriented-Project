@@ -3,6 +3,8 @@ package repository;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 /*
@@ -25,9 +27,18 @@ public class Console {
   public static void main (String[] args) throws Exception {   	 
     
     try {
-      FileInputStream fileIn = new FileInputStream("dealership.txt");
-      ObjectInputStream in = new ObjectInputStream(fileIn);
+      //FileInputStream fileIn = new FileInputStream("dealership.txt");
+      ObjectInputStream in;
+      in = new ObjectInputStream(Files.newInputStream(Paths.get("dealership.txt")));
       Vehicle v;
+      
+      for (int i = 0; i < 1; ++i) {
+        v = (Vehicle) in.readObject();
+        System.out.println();
+      }
+      
+      in.close();
+        
       /* Need to read from file in loop then write to array
       for (Vehicle c : Vehicle.getVehicleArray()) {
         v = (Vehicle) in.readObject();
