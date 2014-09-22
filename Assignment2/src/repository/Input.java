@@ -1,7 +1,6 @@
 package repository;
 
 import java.util.Scanner;
-import java.lang.Object;
 
 /**
  * Class Input provides methods to add, delete, and search records of an
@@ -20,22 +19,25 @@ public class Input {
    * @param in reuse Scanner in object
    * @param temp reuses Vehicle object temp
    */
-  public void addRecord(Scanner in, Vehicle temp) {
+  public void addRecord(Scanner in, Vehicle temp, int option) {
     in = new Scanner(System.in);
     boolean flag = false;
-    int minYear = 1950;
+    int minYear = 1949;
     int maxYear = 2017;
-    String license, make, model;
-    int year = 0;
+    String vin, 
+           make, 
+           model;
+    int year = 0, 
+        mileage = 0;
     float price = 0;
 
-    System.out.print("Enter license plate number: ");
-    license = in.next();
+    System.out.print("\nEnter 5 character VIN number: ");
+    vin = in.next();
 
-    for (Vehicle c : Vehicle.getCarArray()) {
-      while (license.equalsIgnoreCase(c.getVin())) {
+    for (Vehicle c : Vehicle.getVehicleArray()) {
+      while (vin.equalsIgnoreCase(c.getVin())) {
         System.out.print("Duplicate found.\nEnter license plate number: ");
-        license = in.next();
+        vin = in.next();
       }
     }
 
@@ -55,9 +57,22 @@ public class Input {
         if (year < maxYear && year > minYear) {
           flag = true;
         }
-
     } while (!(flag));
 
+    flag = false;
+    
+    do {
+      System.out.print("Enter mileage: ");
+      
+        if (in.hasNextInt()) {
+          mileage = in.nextInt();
+        } 
+        
+        if (mileage > -1) {
+          flag = true;
+        }
+    } while (!(flag));
+    
     flag = false;
 
     do {
@@ -66,15 +81,13 @@ public class Input {
         if (in.hasNextFloat()) {
           price = in.nextFloat();
           flag = true;
-        } 
-        else {
+        } else {
           System.out.println("Enter a valid price.");
           in.next();
         }
-
     } while (!(flag));
 
-    temp.addToArray(license, make, model, year, price);
+    temp.addToArray(vin, make, model, year, mileage, price);
 
     System.out.println("Record added.");
   }
@@ -93,10 +106,10 @@ public class Input {
     System.out.print("Enter license plate to delete record: ");
     String key = in.next();
 
-    for (Vehicle c : Vehicle.getCarArray()) {
+    for (Vehicle c : Vehicle.getVehicleArray()) {
 
       if (c.getVin().equalsIgnoreCase(key)) {
-        Vehicle.getCarArray().remove(i);
+        Vehicle.getVehicleArray().remove(i);
         System.out.printf("Record containing plate # %s removed.", key);
         System.out.print("\n");
         return;
@@ -126,7 +139,7 @@ public class Input {
     System.out.print("Enter license plate #: ");
     String key = in.next();
 
-      for (Vehicle c : Vehicle.getCarArray()) {
+      for (Vehicle c : Vehicle.getVehicleArray()) {
 
         if (c.getVin().equalsIgnoreCase(key)) {
 
@@ -189,7 +202,7 @@ public class Input {
     System.out.printf("License Plate  " + "  Manufacturer    "
                       + " Model    " + "    Year  " + "     Price\n");
 
-    for (Vehicle c : Vehicle.getCarArray()) {
+    for (Vehicle c : Vehicle.getVehicleArray()) {
 
       if (c.getPrice() >= min && c.getPrice() <= max) {
 

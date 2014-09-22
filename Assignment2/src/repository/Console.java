@@ -1,7 +1,11 @@
 package repository;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
-import java.io.FileReader;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,108 +25,177 @@ public class Console {
    * @throws Exception
    */ 
   public static void main (String[] args) throws Exception {   	 
+    
+    try {
+      //FileInputStream fileIn = new FileInputStream("dealership.txt");
+      ObjectInputStream in;
+      in = new ObjectInputStream(Files.newInputStream(Paths.get("dealership.txt")));
+      Vehicle v;
+      
+      for (int i = 0; i < 1; ++i) {
+        v = (Vehicle) in.readObject();
+        System.out.println();
+      }
+      
+      in.close();
         
+      /* Need to read from file in loop then write to array
+      for (Vehicle c : Vehicle.getVehicleArray()) {
+        v = (Vehicle) in.readObject();
+        System.out.println(v);
+      }
+      */
+    } catch (IOException ioException) {
+      System.err.println("Error opening file. Try adding data then exit using "
+                         + "menu option 9.");
+    }
+    
     /**
      * @Scanner reads car data from file "cars.txt"
      */    
-    Scanner in = new Scanner(new FileReader("cars.txt"));
-        
+    Scanner in = new Scanner(System.in);//(new FileReader("cars.txt"));
+   
     /**
-     * license plate number.
+     * Vehicle VIN number.
      */ 
-    String carPlate;
+    String vehicleVin;
         
     /**
-     *  make of a car.
+     *  The make of the vehicle.
      */    
-    String carMake;
+    String vehicleMake;
         
     /**
-     *  model of a car.
+     *  The model of the vehicle.
      */    
-    String carModel;
+    String vehicleModel;
         
     /**
-     *  year of a car.
+     *  The year of the vehicle.
      */   
-    int carYear;
+    int vehicleYear;
+    
+    /**
+     * The mileage of the vehicle.
+     */
+    int vehicleMileage;
         
     /**
-     *  price of a car.
+     *  The price of the vehicle.
      */
-    float carPrice; 
+    float vehiclePrice; 
+    
+    
+    //experiment
+    Vehicle vehicle = new Vehicle ();
         
     /**
      * new object of type Car       
      */
-    Vehicle record = new Vehicle ();
+    Car car = new Car ();
+    
+    /**
+     * new object of type Truck
+     */
+    Truck truck = new Truck ();
+    
+    /**
+     * new object of type Motorcycle
+     */
+    Motorcycle bike = new Motorcycle ();
         
     /**
      * new object of type Input
      */
-    Input input = new Input();        
+    Input input = new Input ();        
         
     /**
      *  integer variable to hold user input
      */
-    int choice;      
-        
+    int choice;
+    
+    /**
+     *  integer variable to hold user vehicle choice
+     */
+    int option;
+    
+    /*Omitting for now to test adding a vehicle, no criteria established
+    //yet on how to determine a Car from a Truck from a Motorcycle
     while ( in.hasNextLine() ) {
       String line = in.nextLine();
       String [] data = line.split(" ");
-      carPlate = data[0];
-      carMake = data[1];
-      carModel = data[2];
-      carYear = Integer.parseInt(data[3]);
-      carPrice = Float.parseFloat(data[4]);
-      record.addToArray(carPlate, carMake, carModel, carYear, carPrice);
+      vehicleVin = data[0];
+      vehicleMake = data[1];
+      vehicleModel = data[2];
+      vehicleYear = Integer.parseInt(data[3]);
+      vehiclePrice = Float.parseFloat(data[4]);
+      car.addToArray(vehicleVin, vehicleMake, vehicleModel, vehicleYear, 
+                     vehicleMileage, vehiclePrice);
     }
         
-    in.close();
+    fileOut.close();
+    */
         
     do {
-      printMenu();
+      printMenu ();
         
-      choice = userChoice( in );
+      choice = userChoice  (in);
         
       switch (choice) {
-        case '1':  
-          input.addRecord( in, record ); 
+        case '1':
+          do {
+            option = vehicleChoice (in);
+            switch (option) {
+              case '1': 
+                input.addRecord (in, car, option); 
+                break;
+              case '2':
+                input.addRecord (in, truck, option);
+                break;
+              case '3':
+                input.addRecord (in, bike, option); 
+                break;
+              case '4':
+                break;
+              default : 
+                System.out.printf("Not a valid option%n", option);
+            }
+          } while (option != '4');
           break;
         case '2':  
-          input.deleteRecord( in, record );
+          //input.deleteRecord( in, record );
           break;
         case '3':  
-          record.printRecords();
+          vehicle.printRecords();
           break;
         case '4':  
-          input.priceRange( in );//input.searchRecords( in );
+          //input.priceRange( in );//input.searchRecords( in );
           break;
         case '5':  
           
           break;
         case '6':  
-          //record.saveData();
+          
           break;
         case '7':
           break;
         case '8':
           break;
         case '9':
+          vehicle.saveData();
           break;
         default: 
-          System.out.printf( "Not a valid option%n", choice );
+          System.out.printf("Not a valid option%n", choice);
       }
-        
-    } while ( choice != '9' );
+    } while (choice != '9');
   }
     
   /**
    * Prints a menu out to the console.
    */   
-  public static void printMenu() {
-    System.out.print( "\n" );
-    System.out.print( "Choose one of the following:\n" 
+  public static void printMenu () {
+    System.out.print("\n");
+    System.out.print("Choose one of the following:\n" 
                      + "\t1. Add a new vehicle to the database.\n"
                      + "\t2. Delete a vehicle from a database (by VIN)\n"
                      + "\t3. Show all existing vehicles in the database.\n"
@@ -139,12 +212,26 @@ public class Console {
    * @param in reusing Scanner in object
    * @return user input read by Scanner, an integer value between 1 and 6
    */
-  public static int userChoice( Scanner in ) {
+  public static int userChoice(Scanner in) {
     in = new Scanner(System.in);
-    System.out.print( "Your choice: " );
+    System.out.print("Your choice: ");
 
     char command = in.next().charAt(0);
 
     return command;
+  }
+  
+  public static int vehicleChoice(Scanner in) {
+    in = new Scanner(System.in);
+    System.out.print("\nChoose Vehicle Type: \n"
+                     + "\t1. Car\n"
+                     + "\t2. Truck\n"
+                     + "\t3. Motorcycle\n"
+                     + "\t4. Back to Main Menu.\n"
+                     + "Your choice: ");
+    
+    char selection = in.next().charAt(0);
+    
+    return selection;
   }
 }
