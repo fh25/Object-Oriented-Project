@@ -3,8 +3,6 @@ package repository;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Scanner;
 
 /*
@@ -28,8 +26,7 @@ public class Console {
     
     try {
       //FileInputStream fileIn = new FileInputStream("dealership.txt");
-      ObjectInputStream in;
-      in = new ObjectInputStream(new FileInputStream("dealership.txt"));
+      ObjectInputStream in = new ObjectInputStream(new FileInputStream("dealership.txt"));
       Vehicle v;
       
       for (int i = 0; i < 1; ++i) {
