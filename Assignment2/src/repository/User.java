@@ -6,6 +6,8 @@
 
 package repository; //just a test comment
 
+import java.util.ArrayList;
+
 /**
  *
  * @author fhj
@@ -26,6 +28,8 @@ public class User {
    * This user's last name.
    */
   private String lastName;
+  
+  
 
   public int getId() {
     return id;
