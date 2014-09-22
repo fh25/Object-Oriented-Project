@@ -29,12 +29,12 @@ public class Console {
     try {
       //FileInputStream fileIn = new FileInputStream("dealership.txt");
       ObjectInputStream in;
-      in = new ObjectInputStream(Files.newInputStream(Paths.get("dealership.txt")));
+      in = new ObjectInputStream(new FileInputStream("dealership.txt"));
       Vehicle v;
       
       for (int i = 0; i < 1; ++i) {
         v = (Vehicle) in.readObject();
-        System.out.println();
+        System.out.println(v);
       }
       
       in.close();
