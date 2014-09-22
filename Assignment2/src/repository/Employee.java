@@ -22,17 +22,31 @@ public class Employee extends User {
    */
   private int accountNumber;
 
+  /**
+   * 
+   * @return Returns this employee's salary.
+   */
   public float getSalary() {
     return salary;
   }
-
+/**
+ * 
+ * @param salary the value of this employee's salary.
+ */
   public void setSalary(float salary) {
     this.salary = salary;
   }
-
+/**
+ * 
+ * @return this employee's account number.
+ */
   public int getAccountNumber() {
     return accountNumber;
   }
+ /**
+  * 
+  * @param accountNumber this employees account number.
+  */
 
   public void setAccountNumber(int accountNumber) {
     this.accountNumber = accountNumber;
