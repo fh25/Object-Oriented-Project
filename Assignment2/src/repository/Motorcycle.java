@@ -38,5 +38,18 @@ public class Motorcycle extends Vehicle {
     this.engine = engine;
   }
   
-  
+  public void printMotorcycle () {
+    
+    System.out.println("\nMotorcycle:");
+    System.out.printf("VIN Number  " + "  Manufacturer    " + " Model    " 
+                      + "    Type    " + " Engine cc " + "  Year  " 
+                      + "     Price\n");
+        
+    for (Vehicle c : Vehicle.getVehicleArray()) {
+      System.out.printf("   %-7s       " + "%-10s     " + "%-10s" + "   %8s " 
+                        + "  %-4d " + "  %4d   " + "   $%,10.2f\n", getVin(), getMake(), 
+                        getModel(), getType(), getEngine(), getYear(), 
+                        getPrice());
+    }
+  }
 }

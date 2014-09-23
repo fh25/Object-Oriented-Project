@@ -101,7 +101,10 @@ public class Console {
           input.deleteRecord( in, vehicle );
           break;
         case '3':  
-          vehicle.printRecords();
+          car.printCar(car);
+          truck.printTruck();
+          bike.printMotorcycle();
+//vehicle.printRecords();
           break;
         case '4':  
           //input.priceRange( in );//input.searchRecords( in );
@@ -158,7 +161,7 @@ public class Console {
   
   public static int vehicleChoice(Scanner in) {
     in = new Scanner(System.in);
-    System.out.print("\nChoose Vehicle Type: \n"
+    System.out.print("\nChoose Vehicle Type To Add: \n"
                      + "\t1. Car\n"
                      + "\t2. Truck\n"
                      + "\t3. Motorcycle\n"
@@ -190,7 +193,7 @@ public class Console {
         v.addObject(v);
       }
     } catch (IOException ioException) {
-      
+ 
     }
   }
   

@@ -21,47 +21,38 @@ public class Input {
    */
   public void addRecord(Scanner in, Vehicle temp, int option) {
     in = new Scanner(System.in);
+    
     boolean flag = false;
+    
     int minYear = 1949,
         maxYear = 2017,
-        displacement = 0;
-    String vin, 
-           make, 
-           model,
-           style,
-           type;
-    int year = 0, 
-        mileage = 0,
         minLength = 10,
         minLoadWeight = 2800;
-    float price = 0,
-          loadWeight = 0,
-          length = 0;
 
     System.out.print("\nEnter 5 character VIN number: ");
-    vin = in.next();
+    temp.setVin(in.next()); 
 
     for (Vehicle c : Vehicle.getVehicleArray()) {
-      while (vin.equalsIgnoreCase(c.getVin())) {
-        System.out.print("Duplicate found.\nEnter license plate number: ");
-        vin = in.next();
+      while (temp.getVin().equalsIgnoreCase(c.getVin())) {
+        System.out.print("Duplicate found.\nEnter VIN number: ");
+        temp.setVin(in.next());
       }
     }
 
     System.out.print("Enter make: ");
-    make = in.next();
+    temp.setMake(in.next());
 
     System.out.print("Enter model: ");
-    model = in.nextLine();
+    temp.setModel(in.next());
 
     do {
       System.out.print("Enter year between 1950-2016: ");
 
         if (in.hasNextInt()) {
-          year = in.nextInt();
+          temp.setYear(in.nextInt());
         }
 
-        if (year < maxYear && year > minYear) {
+        if (temp.getYear() < maxYear && temp.getYear() > minYear) {
           flag = true;
         }
     } while (!(flag));
@@ -72,10 +63,10 @@ public class Input {
       System.out.print("Enter mileage: ");
       
         if (in.hasNextInt()) {
-          mileage = in.nextInt();
+          temp.setMileage(in.nextInt()); 
         } 
         
-        if (mileage > -1) {
+        if (temp.getMileage() > -1) {
           flag = true;
         }
     } while (!(flag));
@@ -86,11 +77,11 @@ public class Input {
       System.out.print("Enter price: ");
 
         if (in.hasNextFloat()) {
-          price = in.nextFloat();
+          temp.setPrice(in.nextFloat());
+        } 
+        
+        if (temp.getPrice() > 0) {
           flag = true;
-        } else {
-          System.out.println("Enter a valid price.");
-          in.next();
         }
     } while (!(flag));
     
@@ -98,46 +89,25 @@ public class Input {
     
     if (option == '1') {
       
-      System.out.print("\nSelect body style:\n"
-                     + "\t1. Coupe\n"
-                     + "\t2. Sedan\n"
-                     + "\t3. Mini-Van\n"
-                     + "\t4. SUV\n"
-                     + "Your choice: ");
+      Car c = new Car ();
+      
+      System.out.print("Enter body style: ");
+      c.setStyle(in.next());
+      
+      c.addObject(temp);
     
-      char selection = in.next().charAt(0);
-    
-        do {
-          switch (selection) {
-            case '1': 
-              style = "Coupe"; 
-              break;
-            case '2':
-              style = "Sedan";
-              break;
-            case '3':
-              style = "Mini-Van"; 
-              break;
-            case '4':
-              style = "SUV";
-              break;
-            case '5':
-              break;
-            default : 
-              System.out.printf("Not a valid option%n", selection);
-          }
-        } while (selection != '5');
-        
     } else if (option == '2') {
+      
+      Truck t = new Truck ();
       
       do {
         System.out.print("\nEnter maximum load weight (min 2800): ");
 
         if (in.hasNextFloat()) {
-          loadWeight = in.nextFloat();  
+          t.setWeight(in.nextFloat());  
         } 
         
-        if (loadWeight >= minLoadWeight) {
+        if (t.getWeight() >= minLoadWeight) {
           flag = true;
         }
         
@@ -146,53 +116,43 @@ public class Input {
       flag = false;
       
       do {
-        System.out.print("\nEnter truck length in feet (min 10ft): ");
+        System.out.print("Enter truck length in feet (min 10ft): ");
 
         if (in.hasNextFloat()) {
-          length = in.nextFloat();  
+          t.setLength(in.nextFloat());  
         } 
         
-        if (length >= minLength) {
+        if (t.getLength() >= minLength) {
           flag = true;
         }
         
       } while (!(flag));
       
+      t.addObject(temp);
+      
     } else if (option == '3') {
       
-      System.out.print("\nSelect body style:\n"
-                     + "\t1. Coupe\n"
-                     + "\t2. Sedan\n"
-                     + "\t3. Mini-Van\n"
-                     + "\t4. SUV\n"
-                     + "Your choice: ");
-    
-      char selection = in.next().charAt(0);
-    
-        do {
-          switch (selection) {
-            case '1': 
-              style = "Coupe"; 
-              break;
-            case '2':
-              style = "Sedan";
-              break;
-            case '3':
-              style = "Mini-Van"; 
-              break;
-            case '4':
-              style = "SUV";
-              break;
-            case '5':
-              break;
-            default : 
-              System.out.printf("Not a valid option%n", selection);
-          }
-        } while (selection != '5');
+      Motorcycle m = new Motorcycle ();
       
+      System.out.print("Enter motorcycle type: ");
+      m.setType(in.next());
+      
+      flag = false;
+      
+      do {
+        System.out.print("Enter engine displacement: ");
+        
+        if (in.hasNextInt()) {
+          m.setEngine(in.nextInt());
+        }
+      
+        if (m.getEngine() > 0) {
+          flag = true;
+        }
+      } while (!(flag));
+      
+      m.addObject(temp);
     }
-
-    temp.addToArray(vin, make, model, year, mileage, price);
 
     System.out.println("Record added.");
   }
@@ -249,7 +209,7 @@ public class Input {
         if (c.getVin().equalsIgnoreCase(key)) {
 
           System.out.println("Record Found");
-          System.out.printf("License Plate  " + "  Manufacturer    "
+          System.out.printf("VIN Number  " + "  Manufacturer    "
                             + " Model    " + "    Year  " + "     Price\n");
           System.out.printf("   %-7s\t" + "  %-10s\t" + "  %-10s" + "   %4d "
                             + "   $%,10.2f\n", c.getVin(), c.getMake(), 
