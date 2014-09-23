@@ -1,6 +1,8 @@
 package repository;
 
+import java.io.IOException;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 /**
  * Class Input provides methods to add, delete, and search records of an
@@ -23,6 +25,8 @@ public class Input {
     in = new Scanner(System.in);
     
     boolean flag = false;
+    
+    InputMismatchException inputError;
     
     int minYear = 1949,
         maxYear = 2017;
@@ -291,7 +295,12 @@ public class Input {
     
     System.out.println("Record added.");
   }
-  
+  /**
+   * Creates a temporary object of type Employee and sets its attributes to values input by
+   * the user. It then calls a method of the class Employee to add he object to an ArrayList
+   * of type User.
+   * @param in Scanner for user input
+   */
   public void addEmployeeUserRecord(Scanner in){    
     in = new Scanner(System.in);
 	Employee temp  = new Employee();
@@ -301,26 +310,61 @@ public class Input {
 	float salary = 0;
 	int bankAccount = 0;	
 	
-	//identificationNum = Console.incrementCounter();
-	System.out.print("Enter the employee's first name: ");
-	
-	
+	identificationNum = Console.incrementCounter();
+	//try
+	//{
+	System.out.print("Enter the employee's first name: ");	
 	firstName = in.next();
+	//}catch(IOException ){
+	  // in.hasNext();
+	//}
 	
 
-	System.out.print("Enter the employee's last name: ");
+	System.out.print("Enter the employee's last name: ");		
 	lastName = in.next();
+	boolean match = true;
 	
-	System.out.print("Enter the employee's salary: ");
-	salary = in.nextFloat();
+	do {
+		System.out.print("Enter the employee's salary: ");
+		if (in.hasNextFloat()) {
+			salary = in.nextFloat();
+			match = true;
+		}
+		else
+		{
+			System.out.print("Invalid input.\n");
+			match = false;
+			in.next();
+		}
+	} while (!match);	
 	
+	
+	boolean match1 = true;
+	
+	do{	
 	System.out.print("Enter the employee's direct deposit bank account number: ");
+	if(in.hasNextInt())
+	{
 	bankAccount = in.nextInt();
+	match1 = true;
+	}
+	else
+	{
+		System.out.print("Invalid input.\n");
+		match1 = false;
+		in.next();
+	}
+	}while(!match1);
 	
 	temp.addEmployeeRecord(identificationNum, firstName, lastName, salary, bankAccount);	
 	
   }
-  
+  /**
+   * Creates a temporary object of the type Customer and sets its attributes to values input
+   * by the user. It then calls a methof of the class Customer to add the object to an 
+   * ArrayList of type User.
+   * @param in
+   */
   public void addCustomerUserRecord(Scanner in){
 	    in = new Scanner(System.in);
 		Customer c = new Customer();
@@ -329,6 +373,7 @@ public class Input {
 		String lastName = "";
 		String phoneNumber = "";
 		int driversLicense = 0;
+		boolean match = true;
 		
 		identificationNum = Console.incrementCounter();
 		System.out.print("Enter the customer's first name: ");
@@ -337,15 +382,43 @@ public class Input {
 		System.out.print("Enter the customer's last name: ");
 		lastName = in.next();
 		
+		do
+		{		
 		System.out.print("Enter the customer's phone number: ");
-		phoneNumber = in.next();
+		if( in.hasNext())
+		{
+			phoneNumber = in.next();
+			match = true;
+		}
+		else
+		{
+			System.out.print("Invalid phone number.\n");
+			match = false;
+			in.next();
+		}		
+		}while(!match);
 		
+		match = true;
+		do
+		{
+			
 		System.out.print("Enter the customer's drivers license number: ");
+		if(in.hasNextInt())
+		{
 		driversLicense = in.nextInt();
+		match = true;
+		}
+		else
+		{
+			System.out.print("Invalid drivers license number.\n");
+			match = false;
+			in.next();
+		}
+		}while(!match);
 		
 		c.addCustomerRecord(identificationNum, firstName, lastName, driversLicense, phoneNumber);
 		
-		in.close();
+		//in.close();
 	  }
 
   /**
