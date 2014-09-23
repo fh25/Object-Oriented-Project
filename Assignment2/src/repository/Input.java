@@ -291,6 +291,62 @@ public class Input {
     
     System.out.println("Record added.");
   }
+  
+  public void addEmployeeUserRecord(Scanner in){    
+    in = new Scanner(System.in);
+	Employee temp  = new Employee();
+	int identificationNum = 0;
+	String firstName = "";
+	String lastName = "";
+	float salary = 0;
+	int bankAccount = 0;	
+	
+	//identificationNum = Console.incrementCounter();
+	System.out.print("Enter the employee's first name: ");
+	
+	
+	firstName = in.next();
+	
+
+	System.out.print("Enter the employee's last name: ");
+	lastName = in.next();
+	
+	System.out.print("Enter the employee's salary: ");
+	salary = in.nextFloat();
+	
+	System.out.print("Enter the employee's direct deposit bank account number: ");
+	bankAccount = in.nextInt();
+	
+	temp.addEmployeeRecord(identificationNum, firstName, lastName, salary, bankAccount);	
+	
+  }
+  
+  public void addCustomerUserRecord(Scanner in){
+	    in = new Scanner(System.in);
+		Customer c = new Customer();
+		int identificationNum = 0;
+		String firstName = "";
+		String lastName = "";
+		String phoneNumber = "";
+		int driversLicense = 0;
+		
+		identificationNum = Console.incrementCounter();
+		System.out.print("Enter the customer's first name: ");
+		firstName = in.next();
+		
+		System.out.print("Enter the customer's last name: ");
+		lastName = in.next();
+		
+		System.out.print("Enter the customer's phone number: ");
+		phoneNumber = in.next();
+		
+		System.out.print("Enter the customer's drivers license number: ");
+		driversLicense = in.nextInt();
+		
+		c.addCustomerRecord(identificationNum, firstName, lastName, driversLicense, phoneNumber);
+		
+		in.close();
+	  }
 
   /**
    * Deletes an object from ArrayList of type Vehicle.

@@ -29,8 +29,11 @@ public class User {
    */
   private String lastName;
   
+  /**
+   * ArrayList of type User
+   */
+  private static ArrayList<User> userArray = new ArrayList<>();
   
-
   public int getId() {
     return id;
   }
@@ -55,5 +58,12 @@ public class User {
     this.lastName = lastName;
   }
   
+  public void addEmployeeToArray(Employee e){
+	  userArray.add(e);
+  }
+  
+  public void addCustomerToArray(Customer c){
+	  userArray.add(c);
+  }
   
 }

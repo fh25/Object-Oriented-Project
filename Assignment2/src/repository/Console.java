@@ -25,7 +25,14 @@ public class Console {
   /**
    * @ObjectInputStream used to read from a file
    */
+
   private static ObjectInputStream inFile;
+
+  /**
+	 * variable to keep track of how many users there are in the system
+	 */
+	static int userCounter = 0;
+
   
   /**
    * Class Console creates and displays an interactive menu for the user.
@@ -35,6 +42,7 @@ public class Console {
   public static void main (String[] args) throws Exception {   	 
     
     openInFile();
+
     readFile();
     closeInFile();
 
@@ -46,7 +54,15 @@ public class Console {
     //experiment
     Vehicle vehicle = new Vehicle ();
     
-    ArrayList<User> userArray = new ArrayList<>();
+    /**
+     * new object of type User
+     */
+    User user = new User();
+    
+    /**
+     * new object of type Input for employee input
+     */
+    Input employee = new Input();
         
     /**
      * new object of type Car       
@@ -116,7 +132,23 @@ public class Console {
           //input.priceRange( in );//input.searchRecords( in );
           break;
         case '5':  
-          
+          do {
+            option = addUserChoice(in);
+            switch(option){
+            case '1':              
+              //Employee temp = new Employee();
+              input.addEmployeeUserRecord(in);
+              break;
+            case '2':
+              Input customer = new Input();
+              customer.addCustomerUserRecord(in);
+              break;
+            case '3':
+              break;
+            default :
+              System.out.printf(" Not a valid option%n", option);
+            }       	  
+          }while (option != '3');
           break;
         case '6':  
           
@@ -177,6 +209,19 @@ public class Console {
     char selection = in.next().charAt(0);
     
     return selection;
+  }
+  public static int addUserChoice(Scanner in){
+	  in = new Scanner(System.in);
+	  System.out.print("\nChoose a user type to add to the database: \n"
+			  		   + "\t1. Employee \n"
+			  		   + "\t2. Customer \n"
+			  		   + "\t3. Back to Main Menu. \n"
+			  		   + "Your choice: ");
+	  
+	  char selection = in.next().charAt(0);
+	 
+	  return selection;
+	  
   }
   
   public static void openInFile() {
@@ -242,5 +287,9 @@ public class Console {
     } catch (IOException ioException) {
       System.err.println("Error closing file.");
     }
+  }
+  public static int incrementCounter(){
+    ++userCounter;
+	return userCounter;    
   }
 }
