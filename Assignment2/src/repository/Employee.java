@@ -52,6 +52,10 @@ public class Employee extends User {
     this.accountNumber = accountNumber;
   }
   
+  public void addEmployee(){
+	  
+  }
+  
 }
 
 
