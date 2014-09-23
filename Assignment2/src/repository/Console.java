@@ -1,10 +1,14 @@
 package repository;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,7 +25,7 @@ public class Console {
   /**
    * @ObjectInputStream used to read from a file
    */
-  private static ObjectInputStream in;
+  private static ObjectInputStream inFile;
   
   /**
    * Class Console creates and displays an interactive menu for the user.
@@ -30,9 +34,9 @@ public class Console {
    */ 
   public static void main (String[] args) throws Exception {   	 
     
-    openFile();
+    openInFile();
     readFile();
-    closeFile();
+    closeInFile();
 
     /**
      * @Scanner reads car data from file "dealership.txt"
@@ -85,13 +89,13 @@ public class Console {
             option = vehicleChoice (in);
             switch (option) {
               case '1': 
-                input.addRecord (in, car, option); 
+                input.addRecord (in, car); 
                 break;
               case '2':
-                input.addRecord (in, truck, option);
+                input.addRecord (in, truck);
                 break;
               case '3':
-                input.addRecord (in, bike, option); 
+                input.addRecord (in, bike); 
                 break;
               case '4':
                 break;
@@ -105,9 +109,8 @@ public class Console {
           break;
         case '3':  
           car.printCar(car);
-          truck.printTruck();
-          bike.printMotorcycle();
-//vehicle.printRecords();
+          truck.printTruck(truck);
+          bike.printMotorcycle(bike);
           break;
         case '4':  
           //input.priceRange( in );//input.searchRecords( in );
@@ -176,9 +179,9 @@ public class Console {
     return selection;
   }
   
-  public static void openFile() {
+  public static void openInFile() {
     try {
-      in = new ObjectInputStream(new FileInputStream("dealership.txt")); 
+      inFile = new ObjectInputStream(new FileInputStream("dealership.txt")); 
       
     } catch (IOException ioException) {
       System.err.println("Error opening file. Try adding data then exit using "
@@ -191,19 +194,51 @@ public class Console {
     
     try {
       while (true) {
-        v = (Vehicle) in.readObject();
+        v = (Vehicle) inFile.readObject();
+        System.out.println(v); //printing for test purposes
+        v.addObject(v);
+      }
+    } catch (IOException ex) {
+        
+    }
+  }
+  
+  public static void closeInFile() {
+    try {
+      if (inFile != null)
+        inFile.close();
+    } catch (IOException ioException) {
+      System.err.println("Error closing file.");
+    }
+  }
+  
+  public static void openOutFile() {
+    try {
+      FileOutputStream fileOut = new FileOutputStream("dealership.txt");
+      ObjectOutputStream out = new ObjectOutputStream(fileOut); 
+      
+    } catch (IOException ioException) {
+      System.err.println("Error opening file.");
+    }
+  }
+  
+  public static void writeFile() throws ClassNotFoundException {
+    Vehicle v;
+    
+    try {
+      while (true) {
+        v = (Vehicle) inFile.readObject();
         System.out.println(v); //printing for test purposes
         v.addObject(v);
       }
     } catch (IOException ioException) {
- 
     }
   }
   
-  public static void closeFile() {
+  public static void closeOutFile() {
     try {
-      if (in != null)
-        in.close();
+      if (inFile != null)
+        inFile.close();
     } catch (IOException ioException) {
       System.err.println("Error closing file.");
     }

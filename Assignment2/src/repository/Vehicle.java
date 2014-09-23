@@ -137,47 +137,13 @@ public class Vehicle implements Serializable {
   public void addObject (Vehicle temp) {
     vehicleArray.add(temp);
   }
-    
-  /**
-   *  Prints to the console the attributes of type Vehicle stored in an ArrayList.
-   */
-  public void printRecords () { 
-    
-    /*
-    int i = 0;
-    
-    System.out.printf("\nRecord  " + "VIN Number  " + "  Manufacturer    "  
-                      + " Model    " + "    Year  " + "     Price\n" );
         
-      for (Vehicle c : Vehicle.getVehicleArray()) {
-        System.out.printf("  %d    ", ++i );
-        System.out.printf("   %-7s       " + "%-10s     " + "%-10s" + "   %4d " 
-                          + "   $%,10.2f\n", c.getVin(), c.getMake(), 
-                          c.getModel(), c.getYear(), c.getPrice());
-      }
-    
-    */
-  }
-    
   /**
    * Writes data stored in ArrayList to file "dealership.txt"
    * @throws Exception - file not found exception
    */
   public void saveData () throws Exception {
      
-    /*experimenting for Serialization of output file
-    try (PrintWriter outFile = new PrintWriter("cars.txt")) {
-      for ( Vehicle c : Vehicle.getVehicleArray() ) {
-        outFile.println(c);
-      }
-            
-      System.out.print("Data saved.\n");
-    }
-    */
-    
-    /**
-     * 
-     */
     try {
       FileOutputStream fileOut = new FileOutputStream("dealership.txt");
       ObjectOutputStream out = new ObjectOutputStream(fileOut);
