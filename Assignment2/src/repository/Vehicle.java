@@ -66,8 +66,6 @@ public class Vehicle implements Serializable {
     Vehicle.vehicleArray = vehicleArray;
   }
   
-  
-  
   /**
    * Returns the VIN number represented by this Vehicle object.
    * @return this object's license plate number
@@ -111,29 +109,29 @@ public class Vehicle implements Serializable {
   public float getPrice() {
     return price;
   }
-    
-  /**
-   * Creates a temporary object of type Vehicle, setting the values with the given parameters.
-   * @param vehicleVin  the Vehicle license plate number.
-   * @param vehicleMake  the make of the Vehicle.
-   * @param vehicleModel  the model of the Vehicle.
-   * @param vehicleYear  the year of the Vehicle.
-   * @param vehicleMileage the mileage of the Vehicle.
-   * @param vehiclePrice  the price of the Vehicle.
-   */
-  public void addToArray (String vehicleVin, String vehicleMake, 
-                          String vehicleModel, int vehicleYear, 
-                          int vehicleMileage, float vehiclePrice) {
-    
-    Vehicle temp = new Vehicle ();
-    
-    temp.vin = vehicleVin;
-    temp.make  = vehicleMake;
-    temp.model = vehicleModel;
-    temp.year  = vehicleYear;
-    temp.price = vehiclePrice;
-    
-    vehicleArray.add( temp );
+
+  public void setVin(String vin) {
+    this.vin = vin;
+  }
+
+  public void setMake(String make) {
+    this.make = make;
+  }
+
+  public void setModel(String model) {
+    this.model = model;
+  }
+
+  public void setYear(int year) {
+    this.year = year;
+  }
+
+  public void setMileage(int mileage) {
+    this.mileage = mileage;
+  }
+
+  public void setPrice(float price) {
+    this.price = price;
   }
   
   public void addObject (Vehicle temp) {
@@ -144,9 +142,11 @@ public class Vehicle implements Serializable {
    *  Prints to the console the attributes of type Vehicle stored in an ArrayList.
    */
   public void printRecords () { 
+    
+    /*
     int i = 0;
     
-    System.out.printf("Record  " + "VIN Number  " + "  Manufacturer    "  
+    System.out.printf("\nRecord  " + "VIN Number  " + "  Manufacturer    "  
                       + " Model    " + "    Year  " + "     Price\n" );
         
       for (Vehicle c : Vehicle.getVehicleArray()) {
@@ -154,11 +154,13 @@ public class Vehicle implements Serializable {
         System.out.printf("   %-7s       " + "%-10s     " + "%-10s" + "   %4d " 
                           + "   $%,10.2f\n", c.getVin(), c.getMake(), 
                           c.getModel(), c.getYear(), c.getPrice());
-      }      
+      }
+    
+    */
   }
     
   /**
-   * Writes data stored in ArrayList to file "cars.txt"
+   * Writes data stored in ArrayList to file "dealership.txt"
    * @throws Exception - file not found exception
    */
   public void saveData () throws Exception {
@@ -187,7 +189,7 @@ public class Vehicle implements Serializable {
       fileOut.close();
       
     } catch (IOException ioException) {
-      System.err.println("Error openeing file. Terminating.");
+      System.err.println("Error opening file. Terminating.");
       System.exit(1); 
     }
    

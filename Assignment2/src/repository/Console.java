@@ -18,6 +18,9 @@ import java.util.Scanner;
  */
 public class Console {	
   
+  /**
+   * @ObjectInputStream used to read from a file
+   */
   private static ObjectInputStream in;
   
   /**
@@ -32,41 +35,10 @@ public class Console {
     closeFile();
 
     /**
-     * @Scanner reads car data from file "cars.txt"
+     * @Scanner reads car data from file "dealership.txt"
      */    
-    Scanner in = new Scanner(System.in);//(new FileReader("cars.txt"));
+    Scanner in = new Scanner(System.in);
    
-    /**
-     * Vehicle VIN number.
-     */ 
-    String vehicleVin;
-        
-    /**
-     *  The make of the vehicle.
-     */    
-    String vehicleMake;
-        
-    /**
-     *  The model of the vehicle.
-     */    
-    String vehicleModel;
-        
-    /**
-     *  The year of the vehicle.
-     */   
-    int vehicleYear;
-    
-    /**
-     * The mileage of the vehicle.
-     */
-    int vehicleMileage;
-        
-    /**
-     *  The price of the vehicle.
-     */
-    float vehiclePrice; 
-    
-    
     //experiment
     Vehicle vehicle = new Vehicle ();
     
@@ -108,7 +80,7 @@ public class Console {
     do {
       printMenu ();
         
-      choice = userChoice  (in);
+      choice = userChoice (in);
         
       switch (choice) {
         case '1':
@@ -135,7 +107,10 @@ public class Console {
           input.deleteRecord( in, vehicle );
           break;
         case '3':  
-          vehicle.printRecords();
+          car.printCar(car);
+          truck.printTruck();
+          bike.printMotorcycle();
+//vehicle.printRecords();
           break;
         case '4':  
           //input.priceRange( in );//input.searchRecords( in );
@@ -205,7 +180,7 @@ public class Console {
   
   public static int vehicleChoice(Scanner in) {
     in = new Scanner(System.in);
-    System.out.print("\nChoose Vehicle Type: \n"
+    System.out.print("\nChoose Vehicle Type To Add: \n"
                      + "\t1. Car\n"
                      + "\t2. Truck\n"
                      + "\t3. Motorcycle\n"
@@ -250,7 +225,7 @@ public class Console {
         v.addObject(v);
       }
     } catch (IOException ioException) {
-      
+ 
     }
   }
   
