@@ -70,7 +70,10 @@ public class Console {
     //experiment
     Vehicle vehicle = new Vehicle ();
     
-    ArrayList<User> userArray = new ArrayList<>();
+    /**
+     * new object of type User
+     */
+    User user = new User();
         
     /**
      * new object of type Car       
@@ -138,7 +141,20 @@ public class Console {
           //input.priceRange( in );//input.searchRecords( in );
           break;
         case '5':  
-          
+          do {
+            option = addUserChoice(in);
+            switch(option){
+            case '1':
+              add
+              break;
+            case '2':
+              break;
+            case '3':
+              break;
+            default :
+              System.out.printf(" Not a valid option%n", option);
+            }       	  
+          }while (option != 3);
           break;
         case '6':  
           
@@ -199,6 +215,19 @@ public class Console {
     char selection = in.next().charAt(0);
     
     return selection;
+  }
+  public static int addUserChoice(Scanner in){
+	  in = new Scanner(System.in);
+	  System.out.print("\nChoose a user type to add to the database: \n"
+			  		   + "\t1. Employee \n"
+			  		   + "\t2. Customer \n"
+			  		   + "\t3. Back to Main Menu. \n"
+			  		   + "Your choice: ");
+	  
+	  char selection = in.next().charAt(0);
+	  in.close();
+	  return selection;
+	  
   }
   
   public static void openFile() {

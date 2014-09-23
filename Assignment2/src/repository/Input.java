@@ -91,6 +91,36 @@ public class Input {
 
     System.out.println("Record added.");
   }
+  
+  public void addEmployeeUserRecord(Scanner in, User temp, int option){
+    in = new Scanner(System.in);
+	//boolean flag = false;
+	int identificationNum = 0;
+	String firstName = "";
+	String lastName = "";
+	
+	// Randomly generate: identificationNum = 
+	System.out.print("Enter first name: ");
+	firstName = in.next();
+	
+	System.out.print("Enter last name: ");
+	lastName = in.next();
+  }
+  
+  public void addCustomerUserRecord(Scanner in, User temp, int option){
+	    in = new Scanner(System.in);
+		//boolean flag = false;
+		int identificationNum = 0;
+		String firstName = "";
+		String lastName = "";
+		
+		// Randomly generate: identificationNum = 
+		System.out.print("Enter first name: ");
+		firstName = in.next();
+		
+		System.out.print("Enter last name: ");
+		lastName = in.next();
+	  }
 
   /**
    * Deletes an object from ArrayList of type Vehicle.
