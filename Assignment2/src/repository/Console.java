@@ -25,7 +25,6 @@ public class Console {
   /**
    * @ObjectInputStream used to read from a file
    */
-
   private static ObjectInputStream inFile;
 
   /**
@@ -33,16 +32,14 @@ public class Console {
 	 */
 	static int userCounter = 0;
 
-  
   /**
    * Class Console creates and displays an interactive menu for the user.
    * @param args
    * @throws Exception
    */ 
   public static void main (String[] args) throws Exception {   	 
-    
+   
     openInFile();
-
     readFile();
     closeInFile();
 
