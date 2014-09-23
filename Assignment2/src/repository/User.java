@@ -58,9 +58,12 @@ public class User {
     this.lastName = lastName;
   }
   
-  public void addUserToArray(){
-	  
+  public void addEmployeeToArray(Employee e){
+	  userArray.add(e);
   }
   
+  public void addCustomerToArray(Customer c){
+	  userArray.add(c);
+  }
   
 }

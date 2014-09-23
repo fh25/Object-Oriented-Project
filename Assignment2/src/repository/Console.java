@@ -22,6 +22,10 @@ public class Console {
    * @ObjectInputStream used to read from a file
    */
   private static ObjectInputStream in;
+  /**
+	 * variable to keep track of how many users there are in the system
+	 */
+	static int userCounter = 0;
   
   /**
    * Class Console creates and displays an interactive menu for the user.
@@ -29,7 +33,7 @@ public class Console {
    * @throws Exception
    */ 
   public static void main (String[] args) throws Exception {   	 
-    
+	    
     openFile();
     readFile();
     closeFile();
@@ -46,6 +50,11 @@ public class Console {
      * new object of type User
      */
     User user = new User();
+    
+    /**
+     * new object of type Input for employee input
+     */
+    Input employee = new Input();
         
     /**
      * new object of type Car       
@@ -119,17 +128,20 @@ public class Console {
           do {
             option = addUserChoice(in);
             switch(option){
-            case '1':
-              add
+            case '1':              
+              //Employee temp = new Employee();
+              input.addEmployeeUserRecord(in);
               break;
             case '2':
+              Input customer = new Input();
+              customer.addCustomerUserRecord(in);
               break;
             case '3':
               break;
             default :
               System.out.printf(" Not a valid option%n", option);
             }       	  
-          }while (option != 3);
+          }while (option != '3');
           break;
         case '6':  
           
@@ -200,7 +212,7 @@ public class Console {
 			  		   + "Your choice: ");
 	  
 	  char selection = in.next().charAt(0);
-	  in.close();
+	 
 	  return selection;
 	  
   }
@@ -236,5 +248,9 @@ public class Console {
     } catch (IOException ioException) {
       System.err.println("Error closing file.");
     }
+  }
+  public static int incrementCounter(){
+    ++userCounter;
+	return userCounter;    
   }
 }
