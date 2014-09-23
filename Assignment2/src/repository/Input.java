@@ -31,7 +31,9 @@ public class Input {
            style,
            type;
     int year = 0, 
-        mileage = 0;
+        mileage = 0,
+        minLength = 10,
+        minLoadWeight = 2800;
     float price = 0,
           loadWeight = 0,
           length = 0;
@@ -135,7 +137,7 @@ public class Input {
           loadWeight = in.nextFloat();  
         } 
         
-        if (loadWeight >= 2800) {
+        if (loadWeight >= minLoadWeight) {
           flag = true;
         }
         
@@ -144,13 +146,13 @@ public class Input {
       flag = false;
       
       do {
-        System.out.print("\nEnter truck length in feet (min 12ft): ");
+        System.out.print("\nEnter truck length in feet (min 10ft): ");
 
         if (in.hasNextFloat()) {
           length = in.nextFloat();  
         } 
         
-        if (length >= 12) {
+        if (length >= minLength) {
           flag = true;
         }
         
