@@ -42,17 +42,18 @@ public class Truck extends Vehicle {
     
     System.out.println("\nTrucks:");
     System.out.printf("VIN Number  " + "  Manufacturer    " + " Model    " 
-                      + "    Max Load Weight " + "    Length  " + "  Year  " 
-                      + "     Price\n");
+                      + "    Mileage" + "    Max Load " + "  Length  " 
+                      + "    Year    " + "  Price\n");
         
     for (Vehicle v : Vehicle.getVehicleArray()) {
       
       if (v.equals(t)) {
-        System.out.printf("  %-7s     " + "%-10s      " + "%-10s" + "    %1000.2f " 
-                          + "   %10.2f  " + "       %4d      " + "   $%,10.2f\n", 
-                          getVin(), getMake(), getModel(), getWeight(), 
+        System.out.printf("  %-5s     " + "   %-10s      " + "  %-10s" 
+                          + "       %6d    "
+                          + "       %1000.2f " + "      %10.2f  " + "       %4d      " + "   $%,10.2f\n", 
+                          getVin(), getMake(), getModel(), getMileage(), getWeight(), 
                           getLength(), getYear(), getPrice());
+      }
     }
   }
-}
 }

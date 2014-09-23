@@ -7,8 +7,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -118,7 +116,7 @@ public class Console {
           } while (option != '4');
           break;
         case '2':  
-          input.deleteRecord( in, vehicle );
+          input.deleteRecord(in, vehicle);
           break;
         case '3':  
           car.printCar(car);
@@ -225,32 +223,39 @@ public class Console {
     try {
       inFile = new ObjectInputStream(new FileInputStream("dealership.txt")); 
       
-    } catch (IOException ioException) {
-      System.err.println("Error opening file. Try adding data then exit using "
-                         + "menu option 9.");
+    } catch (IOException e) {
+      System.out.println("Try adding data then exit using menu option 9 to "
+                         + "create file. " + e);
+      
     }
   }
   
   public static void readFile() throws ClassNotFoundException {
     Vehicle v;
     
+    if (inFile == null) {
+      return;
+    }
+    
     try {
-      while (true) {
+      while (inFile != null) {
         v = (Vehicle) inFile.readObject();
-        System.out.println(v); //printing for test purposes
         v.addObject(v);
+        System.out.println(v); //printing for test purposes 
       }
-    } catch (IOException ex) {
-        
+    } catch (IOException e) {
+      System.out.println("File empty. Add data." + e);
     }
   }
   
   public static void closeInFile() {
     try {
-      if (inFile != null)
+      if (inFile != null) {
         inFile.close();
-    } catch (IOException ioException) {
-      System.err.println("Error closing file.");
+      }
+    } catch (IOException e) {
+      System.err.println("Error closing file. Terminating." + e);
+      System.exit(1);
     }
   }
   
@@ -259,8 +264,8 @@ public class Console {
       FileOutputStream fileOut = new FileOutputStream("dealership.txt");
       ObjectOutputStream out = new ObjectOutputStream(fileOut); 
       
-    } catch (IOException ioException) {
-      System.err.println("Error opening file.");
+    } catch (IOException e) {
+      System.err.println("Error opening file." + e);
     }
   }
   
@@ -273,7 +278,8 @@ public class Console {
         System.out.println(v); //printing for test purposes
         v.addObject(v);
       }
-    } catch (IOException ioException) {
+    } catch (IOException e) {
+      System.out.println("Error writing to file. " + e);
     }
   }
   
@@ -281,10 +287,12 @@ public class Console {
     try {
       if (inFile != null)
         inFile.close();
-    } catch (IOException ioException) {
-      System.err.println("Error closing file.");
+    } catch (IOException e) {
+      System.err.println("Error closing file. Terminating. " + e);
+      System.exit(1);
     }
   }
+  
   public static int incrementCounter(){
     ++userCounter;
 	return userCounter;    

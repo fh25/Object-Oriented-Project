@@ -97,7 +97,7 @@ public class Input {
  type Truck.
    *
    * @param in reuse Scanner in object
-   * @param temp reuses Vehicle object temp
+   * @param temp uses Truck object temp
    */
   public void addRecord(Scanner in, Truck temp) {
     in = new Scanner(System.in);
@@ -166,7 +166,7 @@ public class Input {
     } while (!(flag));
       
     do {
-      System.out.print("\nEnter maximum load weight (min 2800): ");
+      System.out.print("Enter maximum load weight (min 2800): ");
 
       if (in.hasNextFloat()) {
         temp.setWeight(in.nextFloat());  
