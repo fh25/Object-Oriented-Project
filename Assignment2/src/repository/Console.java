@@ -289,4 +289,7 @@ public class Console {
     ++userCounter;
 	return userCounter;    
   }
+  public static void printUsers(){
+	  
+  }
 }
