@@ -59,9 +59,7 @@ public class Truck extends Vehicle {
     System.out.println("\nTrucks:");
     System.out.printf("VIN Number  " + "  Manufacturer    " + " Model     " 
                       + " Year  " + "  Price " + "    Mileage    " + "\n");
-        
-    //for (Truck t : Truck.getTruckArray()) {
-    //  System.out.print(t);
+
     for (int i = 0; i < Truck.getTruckArray().size(); ++i) {
       System.out.print(Truck.getTruckArray().get(i));
     }

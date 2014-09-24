@@ -6,7 +6,6 @@
 
 package repository; 
 
-import java.io.PrintStream;
 import java.util.ArrayList;
 
 /**
@@ -41,17 +40,19 @@ public class Car extends Vehicle {
     return carArray;
   }
   
-  //public void addObject (Car temp) {
-  //  carArray.add(temp);
-  //}
+  public void addObject (Car temp) {
+    carArray.add(temp);
+  }
   
   public void printCar () {
+    
     System.out.println("\nCars:");
     System.out.printf("VIN Number  " + "  Manufacturer    " + " Model     " 
                       + " Year  " + "  Price " + "    Mileage    " + "\n");
         
-    for (Car c : Car.getCarArray()) {
-      System.out.print(c);
+    for (int i = 0; i < Car.getCarArray().size(); ++i) {
+      //if (Car.getCarArray().get(i)equals())
+      System.out.print(Car.getCarArray().get(i));
     }
   }
 }

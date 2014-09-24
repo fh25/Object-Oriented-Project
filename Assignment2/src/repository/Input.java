@@ -24,7 +24,9 @@ public class Input {
    */
   //public void addRecord(Scanner in, Car temp) {
   
-  public void addRecord (Scanner in, Car temp) {  
+  public void addCarRecord (Scanner in) {  
+    
+    Car temp = new Car ();
     
     boolean flag = false;
     
@@ -95,6 +97,7 @@ public class Input {
       temp.setStyle(in.next());
       
       temp.addObject(temp);
+      temp.addToVehicleArray(temp);
     
     System.out.println("Record added.");
   }
@@ -107,8 +110,9 @@ public class Input {
    * @param in reuse Scanner in object
    * @param temp uses Truck object temp
    */
-  public void addRecord(Scanner in, Truck temp) {
-    in = new Scanner(System.in);
+  public void addTruckRecord(Scanner in) {
+    
+    Truck temp = new Truck ();
     
     boolean flag = false;
     
@@ -204,6 +208,7 @@ public class Input {
     } while (!(flag));
       
     temp.addObject(temp);
+    temp.addToVehicleArray(temp);
       
     System.out.println("Record added.");
   }
@@ -216,8 +221,9 @@ public class Input {
    * @param in reuse Scanner in object
    * @param temp reuses Vehicle object temp
    */
-  public void addRecord(Scanner in, Motorcycle temp) {
-    in = new Scanner(System.in);
+  public void addBikeRecord(Scanner in) {
+    
+    Motorcycle temp = new Motorcycle ();
     
     boolean flag = false;
     
@@ -298,6 +304,7 @@ public class Input {
     } while (!(flag));
       
     temp.addObject(temp);
+    temp.addToVehicleArray(temp);
     
     System.out.println("Record added.");
   }
@@ -417,18 +424,17 @@ public class Input {
    * @param in reuse Scanner in object
    * @param temp reuse Vehicle object temp
    */
-  public void deleteRecord(Scanner in, Vehicle temp) {
+  public void deleteRecord(Scanner in) {
 
-    in = new Scanner(System.in);
     int i = 0;
 
     System.out.print("Enter VIN # to delete record: ");
     String key = in.next();
 
-    for (Vehicle c : temp.getVehicleArray()) {
+    for (Vehicle c : Vehicle.getVehicleArray()) {
 
       if (c.getVin().equalsIgnoreCase(key)) {
-        temp.getVehicleArray().remove(i);
+        Vehicle.getVehicleArray().remove(i);
         System.out.printf("Record containing VIN # %s removed.", key);
         System.out.print("\n");
         return;
@@ -438,7 +444,6 @@ public class Input {
     }
     
     System.out.printf("Record with VIN # %s Not Found.\n", key);
-
   }
 
   /**
@@ -450,7 +455,7 @@ public class Input {
    * @param in reuse Scanner in object
    */
   public void priceRange(Scanner in) {
-    in = new Scanner(System.in);
+ 
     boolean flag = false;
     float min = 0;
     float max = 0;
@@ -461,15 +466,13 @@ public class Input {
         if (in.hasNextFloat()) {
           min = in.nextFloat();
           flag = true;
-        } 
-        else {
+        } else {
           System.out.println("Enter a valid price.");
           in.next();
         }
     } while (!(flag));
 
     flag = false;
-    in = new Scanner(System.in);
 
     do {
       System.out.print("Enter a maximum price: ");
@@ -477,26 +480,23 @@ public class Input {
         if (in.hasNextFloat()) {
           max = in.nextFloat();
           flag = true;
-        } 
-        else {
+        } else {
           System.out.println("Enter a valid price.");
           in.next();
         }
     } while (!(flag));
 
-    System.out.printf("License Plate  " + "  Manufacturer    "
-                      + " Model    " + "    Year  " + "     Price\n");
-/*
-    for (Vehicle c : temp.getVehicleArray()) {
+    System.out.printf("VIN Number  " + "  Manufacturer    " + " Model     " 
+                      + " Year  " + "  Price " + "    Mileage    " + "\n");
+
+    for (Vehicle c : Vehicle.getVehicleArray()) {
 
       if (c.getPrice() >= min && c.getPrice() <= max) {
 
-        System.out.printf("   %-7s\t" + "  %-10s\t" + "  %-10s" + "   %4d "
-                          + "   $%,10.2f\n", c.getVin(), c.getMake(), 
-                          c.getModel(), c.getYear(), c.getPrice());
+        System.out.printf("  %-7s\t" + "%-10s\t" + " %-10s" + "  %4d "
+                          + "     $%,10.2f\n", c.getVin(), c.getMake(), 
+                          c.getModel(), c.getYear(), c.getPrice(), c.getMileage());
       }
-    
     }
-    */
   }
 }

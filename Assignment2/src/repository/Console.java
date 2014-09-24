@@ -110,14 +110,13 @@ public class Console {
             option = vehicleChoice (in);
             switch (option) {
               case '1': 
-                //input.addRecord (in, car); 
-                input.addRecord(in, car);
+                input.addCarRecord(in);
                 break;
               case '2':
-                input.addRecord (in, truck);
+                input.addTruckRecord (in);
                 break;
               case '3':
-                input.addRecord (in, bike); 
+                input.addBikeRecord (in); 
                 break;
               case '4':
                 break;
@@ -127,7 +126,7 @@ public class Console {
           } while (option != '4');
           break;
         case '2':  
-          input.deleteRecord(in, vehicle);
+          input.deleteRecord(in);
           break;
         case '3':  
           car.printCar();
@@ -135,7 +134,7 @@ public class Console {
           bike.printMotorcycle();
           break;
         case '4':  
-          //input.priceRange( in );//input.searchRecords( in );
+          input.priceRange( in );
           break;
         case '5':  
           do {

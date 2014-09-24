@@ -55,13 +55,10 @@ public class Motorcycle extends Vehicle {
   
   public void printMotorcycle () {
     
-    System.out.println("\nMotorcycle:");
+    System.out.println("\nMotorcycles:");
     System.out.printf("VIN Number  " + "  Manufacturer    " + " Model     " 
                       + " Year  " + "  Price " + "    Mileage    " + "\n");
         
-    //for (Motorcycle m : Motorcycle.getMotorcycleArray()) {
-    //  System.out.print(m);
-    //}
     for (int i = 0; i < Motorcycle.getMotorcycleArray().size(); ++i) {
       System.out.print(Motorcycle.getMotorcycleArray().get(i));
     }

@@ -134,7 +134,7 @@ public class Vehicle implements Serializable {
     this.price = price;
   }
   
-  public void addObject (Vehicle temp) {
+  public void addToVehicleArray (Vehicle temp) {
     vehicleArray.add(temp);
   }
   
