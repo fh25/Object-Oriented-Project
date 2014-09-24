@@ -110,7 +110,7 @@ public class Console {
             switch (option) {
               case '1': 
                 //input.addRecord (in, car); 
-                input.addRecord(in);
+                input.addRecord(in, car);
                 break;
               case '2':
                 input.addRecord (in, truck);
@@ -129,13 +129,9 @@ public class Console {
           input.deleteRecord(in, vehicle);
           break;
         case '3':  
-          
-          //for (Vehicle v : Vehicle.getVehicleArray()) {
-        //PrintStream printf = System.out.printf("ArrayList: " + v);
-         // }
-          car.printCar(car);
-          //truck.printTruck(truck);
-          //bike.printMotorcycle(bike);
+          car.printCar();
+          truck.printTruck();
+          bike.printMotorcycle();
           break;
         case '4':  
           //input.priceRange( in );//input.searchRecords( in );

@@ -24,9 +24,8 @@ public class Input {
    */
   //public void addRecord(Scanner in, Car temp) {
   
-  public void addRecord (Scanner in) {  
+  public void addRecord (Scanner in, Car temp) {  
     
-    Car temp = new Car();
     boolean flag = false;
     
     String key;
@@ -96,8 +95,7 @@ public class Input {
       temp.setStyle(in.next());
       
       temp.addObject(temp);
-      
-  
+    
     System.out.println("Record added.");
   }
   
@@ -205,7 +203,7 @@ public class Input {
         
     } while (!(flag));
       
-    //temp.addObject(temp);
+    temp.addObject(temp);
       
     System.out.println("Record added.");
   }
@@ -299,7 +297,7 @@ public class Input {
       }
     } while (!(flag));
       
-    //temp.addObject(temp);
+    temp.addObject(temp);
     
     System.out.println("Record added.");
   }
