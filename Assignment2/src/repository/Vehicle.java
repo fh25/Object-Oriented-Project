@@ -134,20 +134,14 @@ public class Vehicle implements Serializable {
     this.price = price;
   }
   
-  
-  public void addObject (Car temp) {
+  public void addObject (Vehicle temp) {
     vehicleArray.add(temp);
-    int i = vehicleArray.size();
-    System.out.printf("Size of array: %d ", i);
   }
-    
   
   /**
    * Writes data stored in ArrayList to file "dealership.txt"
    * @throws Exception - file not found exception
    */
-  
-  
   public void saveData () throws Exception {
      
     try {
@@ -173,13 +167,9 @@ public class Vehicle implements Serializable {
    * Converts and returns this Vehicle object to a formatted String.
    * @return a String representation of this Vehicle.
    */
-  
   @Override
   public String toString () {
-    System.out.printf("  %-5s       " + "%-10s      " + " %-10s" 
-                          + "   %6d  " + "   %6s " + "     %4d  " 
-                          + "  $%,10.2f\n", vin, make, model, 
-                          mileage, style, year, price);   
+    return ( "  " + vin + "        " + make + "            " + model + "       " 
+            + year + "    " + price + "     " +  mileage +  "      \n");   
   }
-  
 }

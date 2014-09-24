@@ -7,6 +7,7 @@
 package repository; 
 
 import java.io.PrintStream;
+import java.util.ArrayList;
 
 /**
  *
@@ -27,28 +28,30 @@ public class Car extends Vehicle {
     this.style = style;
   }
   
-  public void printCar (Car c) {
-    
+  /**
+   * ArrayList of type Car.
+   */  
+  private static ArrayList<Car> carArray = new ArrayList<>();
+  
+  /**
+   * Returns the ArrayList object of type Car
+   * @return this ArrayList of type Vehicle
+   */  
+  public static ArrayList<Car> getCarArray() {
+    return carArray;
+  }
+  
+  //public void addObject (Car temp) {
+  //  carArray.add(temp);
+  //}
+  
+  public void printCar () {
     System.out.println("\nCars:");
-    System.out.printf("VIN Number  " + "  Manufacturer    " + " Model        " 
-                    + "Mileage    " + "Style    " + "  Year  " + "    Price\n");
+    System.out.printf("VIN Number  " + "  Manufacturer    " + " Model     " 
+                      + " Year  " + "  Price " + "    Mileage    " + "\n");
         
-    for (Vehicle v : Vehicle.getVehicleArray()) {
-     //PrintStream printf = System.out.printf("ArrayList: " + v);
-    
-    
-      //if (v.equals(c)) {
-        
-        /*
-        System.out.printf("  %-5s       " + "%-10s      " + " %-10s" 
-                          + "   %6d  " + "   %6s " + "     %4d  " 
-                          + "  $%,10.2f\n", v.getVin(), v.getMake(), v.getModel(), 
-                          v.getMileage(), getStyle(), v.getYear(), v.getPrice());
-            */
-      //}
-      
-      System.out.print(v);
-        
+    for (Car c : Car.getCarArray()) {
+      System.out.print(c);
     }
   }
 }

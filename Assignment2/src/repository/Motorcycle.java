@@ -6,6 +6,8 @@
 
 package repository;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author fhj
@@ -21,6 +23,15 @@ public class Motorcycle extends Vehicle {
    * This motorcycle's engine displacement.
    */
   private int engine;
+  
+  /**
+   * ArrayList of type Motorcycle.
+   */  
+  private static ArrayList<Motorcycle> motorcycleArray = new ArrayList<>();  
+
+  public static ArrayList<Motorcycle> getMotorcycleArray() {
+    return motorcycleArray;
+  }
 
   public String getType() {
     return type;
@@ -38,22 +49,21 @@ public class Motorcycle extends Vehicle {
     this.engine = engine;
   }
   
-  public void printMotorcycle (Motorcycle m) {
+  public void addObject (Motorcycle temp) {
+    motorcycleArray.add(temp);
+  }
+  
+  public void printMotorcycle () {
     
     System.out.println("\nMotorcycle:");
-    System.out.printf("VIN Number  " + "  Manufacturer    " + " Model       " 
-                      + " Mileage" + "    Type    " + "   Engine cc " 
-                      + "  Year  " + "    Price\n");
+    System.out.printf("VIN Number  " + "  Manufacturer    " + " Model     " 
+                      + " Year  " + "  Price " + "    Mileage    " + "\n");
         
-    for (Vehicle v : Vehicle.getVehicleArray()) {
-      
-      if (v.equals(m)) {
-      System.out.printf("  %-5s       " + "%-10s      " + " %-10s" + "  %6d   " 
-                        + " %8s " + "      %-4d   " + "   %4d " 
-                        + "   $%,10.2f\n", getVin(), getMake(), getModel(), 
-                        getMileage(), getType(), getEngine(), getYear(), 
-                        getPrice());
-      }
+    //for (Motorcycle m : Motorcycle.getMotorcycleArray()) {
+    //  System.out.print(m);
+    //}
+    for (int i = 0; i < Motorcycle.getMotorcycleArray().size(); ++i) {
+      System.out.print(Motorcycle.getMotorcycleArray().get(i));
     }
   }
 }

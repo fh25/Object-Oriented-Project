@@ -6,6 +6,8 @@
 
 package repository;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author fhj
@@ -21,6 +23,16 @@ public class Truck extends Vehicle {
    * This truck's length.
    */
   private float length;
+  
+  /**
+   * ArrayList of type Car.
+   */  
+  private static ArrayList<Truck> truckArray = new ArrayList<>();
+
+  
+  public static ArrayList<Truck> getTruckArray() {
+    return truckArray;
+  }
 
   public float getWeight() {
     return weight;
@@ -38,22 +50,20 @@ public class Truck extends Vehicle {
     this.length = length;
   }
   
-  public void printTruck (Truck t) {
+  public void addObject (Truck temp) {
+    truckArray.add(temp);
+  }
+  
+  public void printTruck () {
     
     System.out.println("\nTrucks:");
-    System.out.printf("VIN Number  " + "  Manufacturer    " + " Model    " 
-                      + "    Mileage" + "    Max Load " + "  Length  " 
-                      + "    Year    " + "  Price\n");
+    System.out.printf("VIN Number  " + "  Manufacturer    " + " Model     " 
+                      + " Year  " + "  Price " + "    Mileage    " + "\n");
         
-    for (Vehicle v : Vehicle.getVehicleArray()) {
-      
-      if (v.equals(t)) {
-        System.out.printf("  %-5s     " + "  %-10s     " + "  %-10s" 
-                          + "   %-6d     " + "%-7.2f    " + "%-4.2f  " 
-                          + "     %-4d " + "   $%,10.2f\n", getVin(), getMake(), 
-                          getModel(), getMileage(), getWeight(), getLength(), 
-                          getYear(), getPrice());
-      }
+    //for (Truck t : Truck.getTruckArray()) {
+    //  System.out.print(t);
+    for (int i = 0; i < Truck.getTruckArray().size(); ++i) {
+      System.out.print(Truck.getTruckArray().get(i));
     }
   }
 }
