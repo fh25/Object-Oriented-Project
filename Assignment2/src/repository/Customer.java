@@ -38,21 +38,5 @@ public class Customer extends User {
 
   public void setDriverLicense(int driverLicense) {
     this.driverLicense = driverLicense;
-  }
-  
-  public void addCustomerRecord(int id, String firstName, String lastName, int driversLicense, String phoneNumber){
-	  	  
-	  Customer temp = new Customer();
-	  
-	  temp.setId(id);
-	  temp.setFirstName(firstName);
-	  temp.setLastName(lastName);
-	  temp.driverLicense = driversLicense;
-	  temp.phoneNumber = phoneNumber;
-	  
-	  temp.addCustomerToArray(temp);
-  }
-  
-  
-  
+  }  
 }
