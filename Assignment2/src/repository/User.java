@@ -104,5 +104,6 @@ public void addEmployeeToEmployeeArray(Employee e){
   public void printUserCustomerHeader(){
 	  System.out.printf("ID" + "  First" + "          Last" + "           DL Number" + "              Phone\n");
   }
+  
 }
 
