@@ -2,8 +2,6 @@ package repository;
 
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.InputMismatchException;
-import java.util.ArrayList;
 
 /**
  * Class Input provides methods to add, delete, and search records of an
@@ -16,14 +14,11 @@ public class Input {
 
   /**
    * Creates a temporary object of type Car setting its attributes to values
- input by the user. The temporary object is then added to ArrayList of
- type Car.
+   * input by the user. The temporary object is then added to ArrayList of
+   * type Car and type Vehicle.
    *
    * @param in reuse Scanner in object
-   * @param temp reuses Vehicle object temp
-   */
-  //public void addRecord(Scanner in, Car temp) {
-  
+   */  
   public void addCarRecord (Scanner in) {  
     
     Car temp = new Car ();
@@ -104,11 +99,10 @@ public class Input {
   
   /**
    * Creates a temporary object of type Truck setting its attributes to values
- input by the user. The temporary object is then added to ArrayList of
- type Truck.
+   * input by the user. The temporary object is then added to ArrayList of
+   * type Truck and type Vehicle.
    *
    * @param in reuse Scanner in object
-   * @param temp uses Truck object temp
    */
   public void addTruckRecord(Scanner in) {
     
@@ -219,11 +213,10 @@ public class Input {
   
   /**
    * Creates a temporary object of type Motorcycle setting its attributes to values
- input by the user. The temporary object is then added to ArrayList of
- type Motorcycle.
+   * input by the user. The temporary object is then added to ArrayList of
+   * type Motorcycle and type Vehicle.
    *
    * @param in reuse Scanner in object
-   * @param temp reuses Vehicle object temp
    */
   public void addBikeRecord(Scanner in) {
     
@@ -316,6 +309,7 @@ public class Input {
     
     System.out.println("Record added.");
   }
+  
   /**
    * Creates a temporary object of type Employee and sets its attributes to values input by
    * the user. It then calls a method of the class Employee to add he object to an ArrayList
@@ -474,10 +468,12 @@ public class Input {
   /**
    * Reads two float values input by the user, a minimum value and maximum
    * value. Then an ArrayList of type Vehicle is traversed. If objects are found
- with price values within the bounds of the values input by the user the
- objects information is printed out to the console.
+   * with price values within the bounds of the values input by the user and the
+   * objects are of a specified type per the user, the information is printed 
+   * out to the console.
    *
    * @param in reuse Scanner in object
+   * @param option specifies which Vehicle type is being searched
    */
   public void priceRange(Scanner in, int option) {
  
@@ -500,19 +496,19 @@ public class Input {
     flag = false;
 
     do {
-      System.out.print("Enter a maximum price: ");
+      System.out.print("Enter a maximum price (greater than the minimum): ");
 
         if (in.hasNextFloat()) {
           max = in.nextFloat();
         } 
         
-        if (max > 0) {
+        if (max > min) {
           flag = true;
         }
     } while (!(flag));
     
     System.out.printf("VIN Number  " + "  Manufacturer    " + " Model     " 
-                      + "   Year  " + "     Price " + "        Mileage    " + "\n");
+                      + "   Year  " + "     Price " + "        Mileage    \n");
     
     if (option == '1') {
       for (Vehicle c : Vehicle.getVehicleArray()) {
@@ -521,9 +517,9 @@ public class Input {
             c.getPrice() >= min && c.getPrice() <= max) {
           
           System.out.printf("  %-5s        " + "%-10s     " + " %-10s" 
-                              + "   %4d " + "   $%,10.2f" + "      %-6d\n", 
-                              c.getVin(), c.getMake(), c.getModel(), 
-                              c.getYear(), c.getPrice(), c.getMileage());
+                            + "   %4d " + "   $%,10.2f" + "      %-6d\n", 
+                            c.getVin(), c.getMake(), c.getModel(), 
+                            c.getYear(), c.getPrice(), c.getMileage());
         }
       }
     } else if (option == '2') {
@@ -551,82 +547,5 @@ public class Input {
           }
         }
       }
-      /*
-    }
-    for (Vehicle c : Vehicle.getVehicleArray()) {
-
-      if (c.getPrice() >= min && c.getPrice() <= max) {
-
-        System.out.printf("  %-7s\t" + "%-10s\t" + " %-10s" + "  %4d "
-                          + "     $%,10.2f\n", c.getVin(), c.getMake(), 
-                          c.getModel(), c.getYear(), c.getPrice(), c.getMileage());
-      }
-    }
-        */
   }
-    
-      
-    
-    /*
-    switch (option) {
-      case '1':
-        carSearch (min, max);
-        break;
-      case '2':
-        truckSearch (min, max);
-        break;
-      case '3':
-        bikeSearch (min, max);
-        break;
-      default:
-        break;
-    }
-  }
-  
-  public void carSearch (float min, float max) {
-    System.out.printf("VIN Number  " + "  Manufacturer    " + " Model     " 
-                      + " Year  " + "  Price " + "    Mileage    " + "\n");
-
-    for (Car c : Car.getCarArray()) {
-
-      if (c.getPrice() >= min && c.getPrice() <= max) {
-
-        System.out.printf("  %-7s\t" + "%-10s\t" + " %-10s" + "  %4d "
-                          + "     $%,10.2f\n", c.getVin(), c.getMake(), 
-                          c.getModel(), c.getYear(), c.getPrice(), c.getMileage());
-      }
-    }
-  }
-  
-  
-  public void truckSearch (float min, float max) {
-    System.out.printf("VIN Number  " + "  Manufacturer    " + " Model     " 
-                      + " Year  " + "  Price " + "    Mileage    " + "\n");
-
-    for (Truck t : Truck.getTruckArray()) {
-
-      if (t.getPrice() >= min && t.getPrice() <= max) {
-
-        System.out.printf("  %-7s\t" + "%-10s\t" + " %-10s" + "  %4d "
-                          + "     $%,10.2f\n", t.getVin(), t.getMake(), 
-                          t.getModel(), t.getYear(), t.getPrice(), t.getMileage());
-      }
-    }
-  }
-  
-  public void bikeSearch (float min, float max) {
-    System.out.printf("VIN Number  " + "  Manufacturer    " + " Model     " 
-                      + " Year  " + "  Price " + "    Mileage    " + "\n");
-
-    for (Motorcycle m : Motorcycle.getMotorcycleArray()) {
-
-      if (m.getPrice() >= min && m.getPrice() <= max) {
-
-        System.out.printf("  %-7s\t" + "%-10s\t" + " %-10s" + "  %4d "
-                          + "     $%,10.2f\n", m.getVin(), m.getMake(), 
-                          m.getModel(), m.getYear(), m.getPrice(), m.getMileage());
-      }
-    }
-  }
-        */
 }
