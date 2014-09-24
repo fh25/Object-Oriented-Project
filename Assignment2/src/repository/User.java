@@ -32,7 +32,8 @@ public class User {
   /**
    * ArrayList of type User
    */
-  private static ArrayList<User> userArray = new ArrayList<>();
+  private static ArrayList<Employee> userArrayEmployee = new ArrayList<>();
+  private static ArrayList<Customer> userArrayCustomer = new ArrayList<>();
   
   public int getId() {
     return id;
@@ -58,19 +59,50 @@ public class User {
     this.lastName = lastName;
   }
   
-  public void addEmployeeToArray(Employee e){
-	  userArray.add(e);
+  public static ArrayList<Employee> getUserArrayEmployee() {
+	return userArrayEmployee;
+}
+
+public static void setUserArrayEmployee(ArrayList<Employee> userArrayEmployee) {
+	User.userArrayEmployee = userArrayEmployee;
+}
+
+public static ArrayList<Customer> getUserArrayCustomer() {
+	return userArrayCustomer;
+}
+
+public static void setUserArrayCustomer(ArrayList<Customer> userArrayCustomer) {
+	User.userArrayCustomer = userArrayCustomer;
+}
+
+public void addEmployeeToEmployeeArray(Employee e){
+	  userArrayEmployee.add(e);
   }
   
-  public void addCustomerToArray(Customer c){
-	  userArray.add(c);
+  public void addCustomerToCustomerArray(Customer c){
+	  userArrayCustomer.add(c);
   }
   
-  public void printUserArray(){
-	  for( int i = 0; i < userArray.size(); ++i ){
-		  System.out.println(userArray.get(i) );
-		  System.out.print('\n');
+  public void printUserEmployeeArray(){	  
+	  for( Employee e : getUserArrayEmployee() ){
+		  
+		 System.out.printf("% 2d  " +  "%-15.10s" +  "%-15.30s" + "$%,.2f" + "% 15d\n",  e.getId(), e.getFirstName(), e.getLastName(), e.getSalary(), e.getAccountNumber() );
+	  }
+  }
+  public void printUserArrayHeader(){
+	  
+	  System.out.printf("ID" + "  First" + "          Last" + "           Salary" + "                Account\n");
+	  
+  } 
+
+  public void printUserCustomerArray(){
+	  for( Customer c : getUserArrayCustomer()){
+		  System.out.printf("% 2d  " +  "%-15.10s" +  "%-15.30s" + "15d" + "%-15s\n",  c.getId(), c.getFirstName(), c.getLastName(), c.getDriverLicense(), c.getPhoneNumber() );
 	  }
   }
   
+  public void printUserCustomerHeader(){
+	  System.out.printf("ID" + "  First" + "          Last" + "           DL Number" + "              Phone\n");
+  }
 }
+
