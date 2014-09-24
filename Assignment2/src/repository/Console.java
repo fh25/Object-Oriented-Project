@@ -170,17 +170,98 @@ public class Console {
             }       	  
           }while (option != '3');
           break;
+//**********************************CASE6  PART 1 START****************************************
         case '6':  
         		option = updateUser(in);
         		switch(option){
         		case '1':
         		  int idE = input.getsearchIDNumber(in);
-        		  user.editUserEmployee(in, idE);
+        		  int found = findUserEmployee(in, idE);
+        		  if(found == -1 )
+        			  break;
+        		  else
+        		  {
+        			  Employee e = new Employee(); 
+        			  e = User.getUserArrayEmployee().get(found);
+        			  
+        		  do{   
+        			    option = updateEmployeeMenu(in);
+        			    //option = in.nextInt(); 
+        			    //System.out.print("Choice: " + option + "\n");
+        			    switch(option)
+        			    {
+        			    case '1' :
+        			    	System.out.print("Enter new ID number: " );
+        			    	int id = in.nextInt();        			    	
+        			    	e.setId(id);
+        			    	break;
+        			    case '2': 
+        			    	System.out.print("Enter first name: ");
+        			    	
+        			    	e.setFirstName(in.next());
+        			    	break;
+        			    case '3':
+        			    	System.out.print("Enter last name: ");
+        			    	e.setLastName(in.next());
+        			    	break;
+        			    case '4':
+        			    	System.out.print("Enter salary: ");
+        			    	e.setSalary(in.nextFloat());
+        			    	break;
+        			    case '5':
+        			    	System.out.print("Enter bank account number: ");
+        			    	e.setAccountNumber(in.nextInt());
+        			    	break;
+        			    case '6':
+        			    	break;
+        			    default:
+        			    	System.out.printf(" Not a valid option%n", choice);  
+        			    }
+        			    }while(choice != '6');
+        		  }
         		  break;
-        		  
+//*******************************************CASE 6 PART2**************************        		  
         		case '2':
         		  int idC = input.getsearchIDNumber(in);
-        		  user.editUserCustomer(in, idC);
+        		  found = findUserCustomer(in, idC);
+        		  if(found == -1 )
+        			  break;
+        		  else
+        		  {
+        			  Customer c = new Customer(); 
+        			  c = User.getUserArrayCustomer().get(found);
+        			  do{
+        				  option = updateCustomerMenu(in);
+        				  
+        				  switch(option)
+        				    {
+        				    case '1':
+        				    	System.out.print("Enter new ID number: " );
+        				    	c.setId(in.nextInt());
+        				    	break;
+        				    case '2': 
+        				    	System.out.print("Enter first name: ");
+        				    	c.setFirstName(in.next());
+        				    	break;
+        				    case '3':
+        				    	System.out.print("Enter last name: ");
+        				    	c.setLastName(in.next());
+        				    	break;
+        				    case '4':
+        				    	System.out.print("Enter drivers license number: ");
+        				    	c.setDriverLicense(in.nextInt());
+        				    	break;
+        				    case '5':
+        				    	System.out.print("Enter phone number: ");
+        				    	c.setPhoneNumber(in.next());
+        				    	break;
+        				    case '6':
+        				    	break;
+        				    default:
+        				    	System.out.printf("Invalid entry.", choice);
+        				    }
+        			  	}while(choice != '6');        			  
+        		  }
         		  break;
         		case'3':
         		  break;
@@ -279,6 +360,34 @@ public class Console {
 	  return selection;
   }
   
+  public static int updateEmployeeMenu(Scanner in){	
+			
+		    System.out.print("Select a field to update:\n "
+		    				+"\t1. ID Number\n "
+		    				+"\t2. First Name\n"
+		    				+"\t3. Last Name\n"
+		    				+"\t4. Salary\n"
+		    				+"\t5. Bank Account Number\n"
+		    				+"\t6. Return to main menu.\n"
+		    				+"Your choice: ");    
+		    char selection = in.next().charAt(0);
+		    return selection;
+  }
+  
+  public static int updateCustomerMenu(Scanner in){
+	    
+	    System.out.print("Select a field to update:\n "
+	    				+"\t1. ID Number\n "
+	    				+"\t2. First Name\n"
+	    				+"\t3. Last Name\n"
+	    				+"\t4. Drivers License\n"
+	    				+"\t5. Phone Number\n"
+	    				+"\t6. Return to main menu.\n"
+	    				+"Your choice: ");
+	    char selection = in.next().charAt(0);
+	    return selection;
+  }
+  
   public static void openInFile() {
     try {
       inFile = new ObjectInputStream(new FileInputStream("dealership.txt")); 
@@ -327,7 +436,37 @@ public class Console {
     ++userCounter;
 	return userCounter;    
   }
-  public static void printUsers(){
+public static int findUserEmployee(Scanner in, int id){
 	  
+	  for(Employee e: User.getUserArrayEmployee()){
+	    if( id == e.getId() ){
+	      System.out.printf("ID" + "  First" + "          Last" + "           Salary" + "                Account\n");	  
+		  System.out.printf("% 2d  " +  "%-15.10s" +  "%-15.30s" + "$%,.2f" + "% 15d\n",  e.getId(), e.getFirstName(), e.getLastName(), e.getSalary(), e.getAccountNumber() );
+		  
+		  return e.getUserArrayEmployee().indexOf(e);
+	    }
+		  else
+		  {
+			  System.out.print("The ID number was not found.");
+		  }
+		  }
+	  return -1;
+		  
   }
+
+public static int findUserCustomer(Scanner in, int id){
+	for(Customer c: User.getUserArrayCustomer()){
+	    if( id == c.getId() ){
+	      System.out.printf("ID" + "  First" + "          Last" + "           DL Number" + "              Phone\n");	  
+	      System.out.printf("% 2d  " +  "%-15.10s" +  "%-15.30s" + "%-15d" + "%15s\n",  c.getId(), c.getFirstName(), c.getLastName(), c.getDriverLicense(), c.getPhoneNumber() );
+	      return c.getUserArrayCustomer().indexOf(c);
+}
+	    else
+	    {
+	    	System.out.print("The ID number was not found.");
+	    }
+	    
+		}
+	return -1;
+ 	}
 }

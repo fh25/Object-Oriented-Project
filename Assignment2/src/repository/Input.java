@@ -454,7 +454,7 @@ public class Input {
   }
   
   public int getsearchIDNumber(Scanner in){
-	  int searchID = 0;
+	  int searchID = 0;	 
 	  boolean isInt = true;
 	  do{
 		  System.out.print(" Enter a valid ID number: ");
@@ -567,7 +567,7 @@ public class Input {
         */
   }
   
-  public void updateEmployeeUser(Scanner in, Employee e){	
+ /* public int updateEmployeeUser(Scanner in, Employee e){	
 	int choice = 0;
 	
     System.out.print("Select a field to update:\n "
@@ -586,7 +586,8 @@ public class Input {
     {
     case 1 :
     	System.out.print("Enter new ID number: " );
-    	e.setId(in.nextInt());
+    	int id = in.nextInt();
+    	e.setId(id);
     	break;
     case 2: 
     	System.out.print("Enter first name: ");
@@ -613,7 +614,8 @@ public class Input {
     
   	
   }
-  
+  */
+  /*
   public void updateCustomerUser(Scanner in, Customer c){
 	    
 	    System.out.print("Select a field to update:\n "
@@ -658,7 +660,7 @@ public class Input {
 	    }while(choice != 6);
 	  	
 	  }
-    
+    */
       
     
     /*
