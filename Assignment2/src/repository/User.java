@@ -6,6 +6,9 @@
 
 package repository; //just a test comment
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -104,7 +107,6 @@ public void addEmployeeToEmployeeArray(Employee e){
   
   public void printUserCustomerHeader(){
 	  System.out.printf("ID" + "  First" + "          Last" + "           DL Number" + "              Phone\n");
-  }
-  
+  }    
 }
 
