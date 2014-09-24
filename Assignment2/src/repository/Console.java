@@ -174,10 +174,13 @@ public class Console {
         		option = updateUser(in);
         		switch(option){
         		case '1':
-        		  int id = input.getsearchIDNumber(in);
+        		  int idE = input.getsearchIDNumber(in);
+        		  user.editUserEmployee(in, idE);
         		  break;
         		  
         		case '2':
+        		  int idC = input.getsearchIDNumber(in);
+        		  user.editUserCustomer(in, idC);
         		  break;
         		case'3':
         		  break;
