@@ -3,6 +3,7 @@ package repository;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.InputMismatchException;
+import java.util.ArrayList;
 
 /**
  * Class Input provides methods to add, delete, and search records of an
@@ -21,25 +22,29 @@ public class Input {
    * @param in reuse Scanner in object
    * @param temp reuses Vehicle object temp
    */
-  public void addRecord(Scanner in, Car temp) {
-    in = new Scanner(System.in);
+  //public void addRecord(Scanner in, Car temp) {
+  
+  public void addRecord (Scanner in) {  
     
+    Car temp = new Car();
     boolean flag = false;
     
-    InputMismatchException inputError;
+    String key;
     
     int minYear = 1949,
         maxYear = 2017;
 
     System.out.print("\nEnter 5 character VIN number: ");
-    temp.setVin(in.next()); 
+    key = in.next(); 
 
     for (Vehicle c : Vehicle.getVehicleArray()) {
-      while (temp.getVin().equalsIgnoreCase(c.getVin())) {
+      if (key.equalsIgnoreCase(c.getVin())) {
         System.out.print("Duplicate found.\nEnter VIN number: ");
-        temp.setVin(in.next());
+        key = in.next();
       }
     }
+    
+    temp.setVin(key);
 
     System.out.print("Enter make: ");
     temp.setMake(in.next());
@@ -91,6 +96,7 @@ public class Input {
       temp.setStyle(in.next());
       
       temp.addObject(temp);
+      
   
     System.out.println("Record added.");
   }
@@ -168,6 +174,8 @@ public class Input {
           flag = true;
         }
     } while (!(flag));
+    
+    flag = false;
       
     do {
       System.out.print("Enter maximum load weight (min 2800): ");
@@ -197,7 +205,7 @@ public class Input {
         
     } while (!(flag));
       
-    temp.addObject(temp);
+    //temp.addObject(temp);
       
     System.out.println("Record added.");
   }
@@ -291,7 +299,7 @@ public class Input {
       }
     } while (!(flag));
       
-    temp.addObject(temp);
+    //temp.addObject(temp);
     
     System.out.println("Record added.");
   }
@@ -435,10 +443,10 @@ public class Input {
     System.out.print("Enter VIN # to delete record: ");
     String key = in.next();
 
-    for (Vehicle c : Vehicle.getVehicleArray()) {
+    for (Vehicle c : temp.getVehicleArray()) {
 
       if (c.getVin().equalsIgnoreCase(key)) {
-        Vehicle.getVehicleArray().remove(i);
+        temp.getVehicleArray().remove(i);
         System.out.printf("Record containing VIN # %s removed.", key);
         System.out.print("\n");
         return;
@@ -496,8 +504,8 @@ public class Input {
 
     System.out.printf("License Plate  " + "  Manufacturer    "
                       + " Model    " + "    Year  " + "     Price\n");
-
-    for (Vehicle c : Vehicle.getVehicleArray()) {
+/*
+    for (Vehicle c : temp.getVehicleArray()) {
 
       if (c.getPrice() >= min && c.getPrice() <= max) {
 
@@ -505,6 +513,8 @@ public class Input {
                           + "   $%,10.2f\n", c.getVin(), c.getMake(), 
                           c.getModel(), c.getYear(), c.getPrice());
       }
+    
     }
+    */
   }
 }

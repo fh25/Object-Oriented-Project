@@ -48,7 +48,7 @@ public class Motorcycle extends Vehicle {
     for (Vehicle v : Vehicle.getVehicleArray()) {
       
       if (v.equals(m)) {
-      System.out.printf("  %-5s       " + "%-10s      " + " %-10s" + "   %6d  " 
+      System.out.printf("  %-5s       " + "%-10s      " + " %-10s" + "  %6d   " 
                         + " %8s " + "      %-4d   " + "   %4d " 
                         + "   $%,10.2f\n", getVin(), getMake(), getModel(), 
                         getMileage(), getType(), getEngine(), getYear(), 

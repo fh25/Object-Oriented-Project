@@ -134,14 +134,20 @@ public class Vehicle implements Serializable {
     this.price = price;
   }
   
-  public void addObject (Vehicle temp) {
+  
+  public void addObject (Car temp) {
     vehicleArray.add(temp);
+    int i = vehicleArray.size();
+    System.out.printf("Size of array: %d ", i);
   }
-        
+    
+  
   /**
    * Writes data stored in ArrayList to file "dealership.txt"
    * @throws Exception - file not found exception
    */
+  
+  
   public void saveData () throws Exception {
      
     try {
@@ -155,19 +161,25 @@ public class Vehicle implements Serializable {
       fileOut.close();
       
     } catch (IOException ioException) {
-      System.err.println("Error opening file. Terminating.");
+      System.err.println("Error opening file. Terminating." + ioException);
       System.exit(1); 
     }
    
     System.out.print("Data saved.\n");
   }
+  
 
   /**
    * Converts and returns this Vehicle object to a formatted String.
    * @return a String representation of this Vehicle.
    */
+  
   @Override
   public String toString () {
-    return ( vin + " " + make + " " + model + " " + year + " " + price );   
+    System.out.printf("  %-5s       " + "%-10s      " + " %-10s" 
+                          + "   %6d  " + "   %6s " + "     %4d  " 
+                          + "  $%,10.2f\n", vin, make, model, 
+                          mileage, style, year, price);   
   }
+  
 }

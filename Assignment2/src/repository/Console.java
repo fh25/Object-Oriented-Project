@@ -1,12 +1,16 @@
 package repository;
 
+import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -24,6 +28,11 @@ public class Console {
    * @ObjectInputStream used to read from a file
    */
   private static ObjectInputStream inFile;
+  
+  /**
+   * @ObjectOutputStream used to write to a file
+   */
+  private static ObjectOutputStream out;
 
   /**
 	 * variable to keep track of how many users there are in the system
@@ -100,7 +109,8 @@ public class Console {
             option = vehicleChoice (in);
             switch (option) {
               case '1': 
-                input.addRecord (in, car); 
+                //input.addRecord (in, car); 
+                input.addRecord(in);
                 break;
               case '2':
                 input.addRecord (in, truck);
@@ -119,9 +129,13 @@ public class Console {
           input.deleteRecord(in, vehicle);
           break;
         case '3':  
+          
+          //for (Vehicle v : Vehicle.getVehicleArray()) {
+        //PrintStream printf = System.out.printf("ArrayList: " + v);
+         // }
           car.printCar(car);
-          truck.printTruck(truck);
-          bike.printMotorcycle(bike);
+          //truck.printTruck(truck);
+          //bike.printMotorcycle(bike);
           break;
         case '4':  
           //input.priceRange( in );//input.searchRecords( in );
@@ -205,6 +219,7 @@ public class Console {
     
     return selection;
   }
+  
   public static int addUserChoice(Scanner in){
 	  in = new Scanner(System.in);
 	  System.out.print("\nChoose a user type to add to the database: \n"
@@ -216,7 +231,6 @@ public class Console {
 	  char selection = in.next().charAt(0);
 	 
 	  return selection;
-	  
   }
   
   public static void openInFile() {
@@ -230,21 +244,24 @@ public class Console {
     }
   }
   
-  public static void readFile() throws ClassNotFoundException {
-    Vehicle v;
+  public static void readFile() {
     
     if (inFile == null) {
       return;
     }
     
     try {
-      while (inFile != null) {
-        v = (Vehicle) inFile.readObject();
-        v.addObject(v);
+      while (true) {
+        Vehicle v = (Vehicle) inFile.readObject();
+        //v.addObject(v);
         System.out.println(v); //printing for test purposes 
       }
-    } catch (IOException e) {
-      System.out.println("File empty. Add data." + e);
+    } 
+    catch (ClassNotFoundException classNotFound) {
+      System.err.println("Invalid object type. " + classNotFound);
+    } 
+    catch (IOException e) {
+      System.err.println("Error reading from file. " + e);
     }
   }
   
@@ -261,8 +278,7 @@ public class Console {
   
   public static void openOutFile() {
     try {
-      FileOutputStream fileOut = new FileOutputStream("dealership.txt");
-      ObjectOutputStream out = new ObjectOutputStream(fileOut); 
+      out = new ObjectOutputStream(new FileOutputStream("dealership.txt")); 
       
     } catch (IOException e) {
       System.err.println("Error opening file." + e);
@@ -270,23 +286,19 @@ public class Console {
   }
   
   public static void writeFile() throws ClassNotFoundException {
-    Vehicle v;
-    
-    try {
-      while (true) {
-        v = (Vehicle) inFile.readObject();
-        System.out.println(v); //printing for test purposes
-        v.addObject(v);
+    for ( Vehicle c : Vehicle.getVehicleArray() ) {
+      try {
+        out.writeObject(c);
+      } catch (IOException ex) {
+        System.err.println("Error writing to file. " + ex);
       }
-    } catch (IOException e) {
-      System.out.println("Error writing to file. " + e);
     }
   }
   
   public static void closeOutFile() {
     try {
-      if (inFile != null)
-        inFile.close();
+      if (out != null)
+        out.close();
     } catch (IOException e) {
       System.err.println("Error closing file. Terminating. " + e);
       System.exit(1);

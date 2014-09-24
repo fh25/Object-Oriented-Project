@@ -48,11 +48,11 @@ public class Truck extends Vehicle {
     for (Vehicle v : Vehicle.getVehicleArray()) {
       
       if (v.equals(t)) {
-        System.out.printf("  %-5s     " + "   %-10s      " + "  %-10s" 
-                          + "       %6d    "
-                          + "       %1000.2f " + "      %10.2f  " + "       %4d      " + "   $%,10.2f\n", 
-                          getVin(), getMake(), getModel(), getMileage(), getWeight(), 
-                          getLength(), getYear(), getPrice());
+        System.out.printf("  %-5s     " + "  %-10s     " + "  %-10s" 
+                          + "   %-6d     " + "%-7.2f    " + "%-4.2f  " 
+                          + "     %-4d " + "   $%,10.2f\n", getVin(), getMake(), 
+                          getModel(), getMileage(), getWeight(), getLength(), 
+                          getYear(), getPrice());
       }
     }
   }
