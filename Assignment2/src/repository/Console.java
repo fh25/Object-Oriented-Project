@@ -163,22 +163,9 @@ public class Console {
             }       	  
           } while (option != '3');
           break;
+//**********************************CASE6  PART 1 START****************************************
         case '6':  
-        		option = updateUser(in);
-        		switch(option){
-        		case '1':
-        		  int idE = input.getsearchIDNumber(in);
-        		  user.editUserEmployee(in, idE);
-        		  break;
-        		case '2':
-        		  int idC = input.getsearchIDNumber(in);
-        		  user.editUserCustomer(in, idC);
-        		  break;
-        		case'3':
-        		  break;
-        		default :
-        		  System.out.printf("Not a valid option", option);
-        		}
+        		
           break;
         case '7':
         		System.out.print("Employees:\n");
@@ -284,9 +271,39 @@ public class Console {
 	  return selection;
   }
   
+
   /**
    * This method opens a file "dealership.txt" for reading.
    */
+  public static int updateEmployeeMenu(Scanner in){	
+			
+		    System.out.print("Select a field to update:\n "
+		    				+"\t1. ID Number\n "
+		    				+"\t2. First Name\n"
+		    				+"\t3. Last Name\n"
+		    				+"\t4. Salary\n"
+		    				+"\t5. Bank Account Number\n"
+		    				+"\t6. Return to main menu.\n"
+		    				+"Your choice: ");    
+		    char selection = in.next().charAt(0);
+		    return selection;
+  }
+  
+  public static int updateCustomerMenu(Scanner in){
+	    
+	    System.out.print("Select a field to update:\n "
+	    				+"\t1. ID Number\n "
+	    				+"\t2. First Name\n"
+	    				+"\t3. Last Name\n"
+	    				+"\t4. Drivers License\n"
+	    				+"\t5. Phone Number\n"
+	    				+"\t6. Return to main menu.\n"
+	    				+"Your choice: ");
+	    char selection = in.next().charAt(0);
+	    return selection;
+  }
+  
+
   public static void openInFile() {
     try {
       inFile = new ObjectInputStream(new FileInputStream("dealership.txt")); 
@@ -344,8 +361,20 @@ public class Console {
     ++userCounter;
 	return userCounter;    
   }
-  
-  public static void printUsers(){
-	  
-  }
+
+public static int findUserCustomer(Scanner in, int id){
+	for(Customer c: User.getUserArrayCustomer()){
+	    if( id == c.getId() ){
+	      System.out.printf("ID" + "  First" + "          Last" + "           DL Number" + "              Phone\n");	  
+	      System.out.printf("% 2d  " +  "%-15.10s" +  "%-15.30s" + "%-15d" + "%15s\n",  c.getId(), c.getFirstName(), c.getLastName(), c.getDriverLicense(), c.getPhoneNumber() );
+	      return c.getUserArrayCustomer().indexOf(c);
+}
+	    else
+	    {
+	    	System.out.print("The ID number was not found.");
+	    }
+	    
+		}
+	return -1;
+ 	}
 }
