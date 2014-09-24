@@ -589,7 +589,7 @@ public class Input {
     default:
     	System.out.printf("Invalid entry.%n", choice);    	
     }
-    }while(choice != 6);
+    }while(choice != '6');
   	
   }
   
