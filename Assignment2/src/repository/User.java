@@ -106,39 +106,6 @@ public void addEmployeeToEmployeeArray(Employee e){
 	  System.out.printf("ID" + "  First" + "          Last" + "           DL Number" + "              Phone\n");
   }
   
-  public void editUserEmployee(Scanner in, int id){
-	  
-	  for(Employee e: getUserArrayEmployee()){
-	    if( id == e.getId() ){
-	      System.out.printf("ID" + "  First" + "          Last" + "           Salary" + "                Account\n");	  
-		  System.out.printf("% 2d  " +  "%-15.10s" +  "%-15.30s" + "$%,.2f" + "% 15d\n",  e.getId(), e.getFirstName(), e.getLastName(), e.getSalary(), e.getAccountNumber() );
-		  Input temp = new Input();
-		  temp.updateEmployeeUser(in, e);
-		  }
-		  }
-  }
-  
-public void editUserCustomer(Scanner in, int id){
-	  
-	  for(Customer c: getUserArrayCustomer()){
-	    if( id == c.getId() ){
-	      System.out.printf("ID" + "  First" + "          Last" + "           DL Number" + "              Phone\n");	  
-	      System.out.printf("% 2d  " +  "%-15.10s" +  "%-15.30s" + "%-15d" + "%15s\n",  c.getId(), c.getFirstName(), c.getLastName(), c.getDriverLicense(), c.getPhoneNumber() );
-		  Input temp = new Input();
-		  temp.updateCustomerUser(in, c);
-  
-  
-public void editUserCustomer(Scanner in, int id){
-	  
-	  for(Customer c: getUserArrayCustomer()){
-	    if( id == c.getId() ){
-	      System.out.printf("ID" + "  First" + "          Last" + "           DL Number" + "              Phone\n");	  
-	      System.out.printf("% 2d  " +  "%-15.10s" +  "%-15.30s" + "%-15d" + "%15s\n",  c.getId(), c.getFirstName(), c.getLastName(), c.getDriverLicense(), c.getPhoneNumber() );
-		  Input temp = new Input();
-		 // temp.updateCustomerUser(in, c);
-		  }
-		  }
-  }
   
 }
 
