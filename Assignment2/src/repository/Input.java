@@ -569,6 +569,7 @@ public class Input {
   
   public void updateEmployeeUser(Scanner in, Employee e){	
 	int choice = 0;
+	
     System.out.print("Select a field to update:\n "
     				+"\t1. ID Number\n "
     				+"\t2. First Name\n"
@@ -576,38 +577,40 @@ public class Input {
     				+"\t4. Salary\n"
     				+"\t5. Bank Account Number\n"
     				+"\t6. Return to main menu.\n"
-    				+"Your choice: ");    
-    
+    				+"Your choice: ");        
+       
     do{
     choice = in.nextInt(); 
+    System.out.print("Choice: " + choice + "\n");
     switch(choice)
     {
-    case '1':
+    case 1 :
     	System.out.print("Enter new ID number: " );
     	e.setId(in.nextInt());
     	break;
-    case '2': 
+    case 2: 
     	System.out.print("Enter first name: ");
     	e.setFirstName(in.next());
     	break;
-    case '3':
+    case 3:
     	System.out.print("Enter last name: ");
     	e.setLastName(in.next());
     	break;
-    case '4':
+    case 4:
     	System.out.print("Enter salary: ");
     	e.setSalary(in.nextFloat());
     	break;
-    case '5':
+    case 5:
     	System.out.print("Enter bank account number: ");
     	e.setAccountNumber(in.nextInt());
     	break;
-    case '6':
+    case 6:
     	break;
     default:
-    	System.out.printf("Invalid entry.%n", choice);    	
+    	System.out.printf(" Not a valid option%n", choice);  
     }
     }while(choice != 6);
+    
   	
   }
   
