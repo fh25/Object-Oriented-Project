@@ -1,7 +1,7 @@
 package repository;
 
+import java.io.IOException;
 import java.util.Scanner;
-import java.lang.Object;
 
 /**
  * Class Input provides methods to add, delete, and search records of an
@@ -13,91 +13,430 @@ import java.lang.Object;
 public class Input {
 
   /**
-   * Creates a temporary object of type Vehicle setting its attributes to values
- input by the user. The temporary object is then added to ArrayList of
- type Vehicle.
+   * Creates a temporary object of type Car setting its attributes to values
+   * input by the user. The temporary object is then added to ArrayList of
+   * type Car and type Vehicle.
    *
    * @param in reuse Scanner in object
-   * @param temp reuses Vehicle object temp
-   */
-  public void addRecord(Scanner in, Vehicle temp) {
-    in = new Scanner(System.in);
+   */  
+  public void addCarRecord (Scanner in) {  
+    
+    Car temp = new Car ();
+    
     boolean flag = false;
-    int minYear = 1950;
-    int maxYear = 2017;
-    String license, make, model;
-    int year = 0;
-    float price = 0;
+    
+    String key;
+    
+    int minYear = 1949,
+        maxYear = 2017;
 
-    System.out.print("Enter license plate number: ");
-    license = in.next();
+    System.out.print("\nEnter 5 character VIN number: ");
+    key = in.next(); 
 
-    for (Vehicle c : Vehicle.getCarArray()) {
-      while (license.equalsIgnoreCase(c.getVin())) {
-        System.out.print("Duplicate found.\nEnter license plate number: ");
-        license = in.next();
+    for (Vehicle c : Vehicle.getVehicleArray()) {
+      while (key.equalsIgnoreCase(c.getVin())) {
+        System.out.print("Duplicate found.\nEnter VIN number: ");
+        key = in.next();
       }
     }
+    
+    temp.setVin(key);
 
     System.out.print("Enter make: ");
-    make = in.next();
+    temp.setMake(in.next());
 
     System.out.print("Enter model: ");
-    model = in.next();
+    temp.setModel(in.next());
 
     do {
       System.out.print("Enter year between 1950-2016: ");
 
         if (in.hasNextInt()) {
-          year = in.nextInt();
+          temp.setYear(in.nextInt());
         }
 
-        if (year < maxYear && year > minYear) {
+        if (temp.getYear() < maxYear && temp.getYear() > minYear) {
           flag = true;
         }
-
     } while (!(flag));
 
+    flag = false;
+    
+    do {
+      System.out.print("Enter mileage: ");
+      
+        if (in.hasNextInt()) {
+          temp.setMileage(in.nextInt()); 
+        } 
+        
+        if (temp.getMileage() > -1) {
+          flag = true;
+        }
+    } while (!(flag));
+    
     flag = false;
 
     do {
       System.out.print("Enter price: ");
 
         if (in.hasNextFloat()) {
-          price = in.nextFloat();
-          flag = true;
+          temp.setPrice(in.nextFloat());
         } 
-        else {
-          System.out.println("Enter a valid price.");
-          in.next();
+        
+        if (temp.getPrice() > 0) {
+          flag = true;
         }
-
     } while (!(flag));
-
-    temp.addToArray(license, make, model, year, price);
-
+      
+    System.out.print("Enter body style: ");
+      temp.setStyle(in.next());
+      
+      temp.addObject(temp);
+      temp.addToVehicleArray(temp);
+    
     System.out.println("Record added.");
   }
+  
+  /**
+   * Creates a temporary object of type Truck setting its attributes to values
+   * input by the user. The temporary object is then added to ArrayList of
+   * type Truck and type Vehicle.
+   *
+   * @param in reuse Scanner in object
+   */
+  public void addTruckRecord(Scanner in) {
+    
+    Truck temp = new Truck ();
+    
+    String key;
+    
+    boolean flag = false;
+    
+    int minYear = 1949,
+        maxYear = 2017,
+        minLength = 10,
+        minLoadWeight = 2800;
+
+    System.out.print("\nEnter 5 character VIN number: ");
+    key = in.next(); 
+
+    for (Vehicle c : Vehicle.getVehicleArray()) {
+      while (key.equalsIgnoreCase(c.getVin())) {
+        System.out.print("Duplicate found.\nEnter VIN number: ");
+        key = in.next();
+      }
+    }
+    
+    temp.setVin(key);
+
+    System.out.print("Enter make: ");
+    temp.setMake(in.next());
+
+    System.out.print("Enter model: ");
+    temp.setModel(in.next());
+
+    do {
+      System.out.print("Enter year between 1950-2016: ");
+
+        if (in.hasNextInt()) {
+          temp.setYear(in.nextInt());
+        }
+
+        if (temp.getYear() < maxYear && temp.getYear() > minYear) {
+          flag = true;
+        }
+    } while (!(flag));
+
+    flag = false;
+    
+    do {
+      System.out.print("Enter mileage: ");
+      
+        if (in.hasNextInt()) {
+          temp.setMileage(in.nextInt()); 
+        } 
+        
+        if (temp.getMileage() > -1) {
+          flag = true;
+        }
+    } while (!(flag));
+    
+    flag = false;
+
+    do {
+      System.out.print("Enter price: ");
+
+        if (in.hasNextFloat()) {
+          temp.setPrice(in.nextFloat());
+        } 
+        
+        if (temp.getPrice() > 0) {
+          flag = true;
+        }
+    } while (!(flag));
+    
+    flag = false;
+      
+    do {
+      System.out.print("Enter maximum load weight (min 2800): ");
+
+      if (in.hasNextFloat()) {
+        temp.setWeight(in.nextFloat());  
+      } 
+        
+      if (temp.getWeight() >= minLoadWeight) {
+        flag = true;
+      }
+        
+    } while (!(flag));
+      
+    flag = false;
+      
+    do {
+      System.out.print("Enter truck length in feet (min 10ft): ");
+
+      if (in.hasNextFloat()) {
+        temp.setLength(in.nextFloat());  
+      } 
+      
+      if (temp.getLength() >= minLength) {
+        flag = true;
+      }
+        
+    } while (!(flag));
+      
+    temp.addObject(temp);
+    temp.addToVehicleArray(temp);
+      
+    System.out.println("Record added.");
+  }
+  
+  /**
+   * Creates a temporary object of type Motorcycle setting its attributes to values
+   * input by the user. The temporary object is then added to ArrayList of
+   * type Motorcycle and type Vehicle.
+   *
+   * @param in reuse Scanner in object
+   */
+  public void addBikeRecord(Scanner in) {
+    
+    Motorcycle temp = new Motorcycle ();
+    
+    String key;
+    
+    boolean flag = false;
+    
+    int minYear = 1949,
+        maxYear = 2017;
+
+    System.out.print("\nEnter 5 character VIN number: ");
+    key = in.next(); 
+
+    for (Vehicle c : Vehicle.getVehicleArray()) {
+      while (key.equalsIgnoreCase(c.getVin())) {
+        System.out.print("Duplicate found.\nEnter VIN number: ");
+        key = in.next();
+      }
+    }
+    
+    temp.setVin(key);
+
+    System.out.print("Enter make: ");
+    temp.setMake(in.next());
+
+    System.out.print("Enter model: ");
+    temp.setModel(in.next());
+
+    do {
+      System.out.print("Enter year between 1950-2016: ");
+
+        if (in.hasNextInt()) {
+          temp.setYear(in.nextInt());
+        }
+
+        if (temp.getYear() < maxYear && temp.getYear() > minYear) {
+          flag = true;
+        }
+    } while (!(flag));
+
+    flag = false;
+    
+    do {
+      System.out.print("Enter mileage: ");
+      
+        if (in.hasNextInt()) {
+          temp.setMileage(in.nextInt()); 
+        } 
+        
+        if (temp.getMileage() > -1) {
+          flag = true;
+        }
+    } while (!(flag));
+    
+    flag = false;
+
+    do {
+      System.out.print("Enter price: ");
+
+        if (in.hasNextFloat()) {
+          temp.setPrice(in.nextFloat());
+        } 
+        
+        if (temp.getPrice() > 0) {
+          flag = true;
+        }
+    } while (!(flag));
+      
+    System.out.print("Enter motorcycle type: ");
+    temp.setType(in.next());
+      
+    flag = false;
+     
+    do {
+      System.out.print("Enter engine displacement: ");
+        
+      if (in.hasNextInt()) {
+        temp.setEngine(in.nextInt());
+      }
+      
+      if (temp.getEngine() > 0) {
+        flag = true;
+      }
+    } while (!(flag));
+      
+    temp.addObject(temp);
+    temp.addToVehicleArray(temp);
+    
+    System.out.println("Record added.");
+  }
+  
+  /**
+   * Creates a temporary object of type Employee and sets its attributes to values input by
+   * the user. It then calls a method of the class Employee to add he object to an ArrayList
+   * of type User.
+   * @param in Scanner for user input
+   */
+  public void addEmployeeUserRecord(Scanner in){    
+  
+	Employee e  = new Employee();	
+	
+	e.setId(Console.incrementCounter());
+	
+	System.out.print("Enter the employee's first name: ");	
+	e.setFirstName(in.next());
+	
+	System.out.print("Enter the employee's last name: ");		
+	e.setLastName(in.next());
+	
+	boolean match = true;
+	
+	do {
+		System.out.print("Enter the employee's salary: ");
+		if (in.hasNextFloat()) {
+			e.setSalary(in.nextFloat());
+			match = true;
+		}
+		else
+		{
+			System.out.print("Invalid input.\n");
+			match = false;
+			in.next();
+		}
+	} while (!match);	
+	
+	
+	boolean match1 = true;
+	
+	do{	
+	System.out.print("Enter the employee's direct deposit bank account number: ");
+	if(in.hasNextInt())
+	{
+	e.setAccountNumber(in.nextInt());
+	match1 = true;
+	}
+	else
+	{
+		System.out.print("Invalid input.\n");
+		match1 = false;
+		in.next();
+	}
+	}while(!match1);
+	
+	e.addEmployeeToEmployeeArray(e);	
+  }
+  
+  /**
+   * Creates a temporary object of the type Customer and sets its attributes to values input
+   * by the user. It then calls a method of the class Customer to add the object to an 
+   * ArrayList of type User.
+   * @param in
+   */
+  public void addCustomerUserRecord(Scanner in){
+	    boolean match = true;
+		Customer c = new Customer();		
+		
+		c.setId(Console.incrementCounter()); 
+		System.out.print("Enter the customer's first name: ");
+		c.setFirstName(in.next());
+		
+		System.out.print("Enter the customer's last name: ");
+		c.setLastName(in.next());
+		
+		do
+		{		
+		System.out.print("Enter the customer's phone number: ");
+		if( in.hasNext())
+		{
+			c.setPhoneNumber(in.next());
+			match = true;
+		}
+		else
+		{
+			System.out.print("Invalid phone number.\n");
+			match = false;
+			in.next();
+		}		
+		}while(!match);
+		
+		match = true;
+		do
+		{
+			
+		System.out.print("Enter the customer's drivers license number: ");
+		if(in.hasNextInt())
+		{
+		c.setDriverLicense(in.nextInt());
+		match = true;
+		}
+		else
+		{
+			System.out.print("Invalid drivers license number.\n");
+			match = false;
+			in.next();
+		}
+		}while(!match);
+		
+		c.addCustomerToCustomerArray(c);	
+		
+	  }
 
   /**
    * Deletes an object from ArrayList of type Vehicle.
    *
    * @param in reuse Scanner in object
-   * @param temp reuse Vehicle object temp
    */
-  public void deleteRecord(Scanner in, Vehicle temp) {
+  public void deleteRecord(Scanner in) {
 
-    in = new Scanner(System.in);
     int i = 0;
 
-    System.out.print("Enter license plate to delete record: ");
+    System.out.print("Enter VIN # to delete record: ");
     String key = in.next();
-
-    for (Vehicle c : Vehicle.getCarArray()) {
+    
+    for (Vehicle c : Vehicle.getVehicleArray()) {
 
       if (c.getVin().equalsIgnoreCase(key)) {
-        Vehicle.getCarArray().remove(i);
-        System.out.printf("Record containing plate # %s removed.", key);
+        Vehicle.getVehicleArray().remove(i);
+        System.out.printf("Record containing VIN # %s removed.", key);
         System.out.print("\n");
         return;
       }
@@ -105,54 +444,39 @@ public class Input {
       ++i;
     }
     
-    System.out.println("Record Not Found.");
-
+    System.out.printf("Record with VIN # %s Not Found.\n", key);
   }
-
-  /**
-   * Reads a String of characters representing a car license plate number
- input by the user and searches an ArrayList of type Vehicle for the object
- with a matching license plate number. If a match is found the system will
-   * print out to the console a message indicating the record was found and
-   * all of the objects information. If the a match is not found the system
-   * will print out "Record Not Found."
-   *
-   * @param in reuse Scanner in object
-   */
-  public void searchRecords(Scanner in) {
-
-    in = new Scanner(System.in);
-
-    System.out.print("Enter license plate #: ");
-    String key = in.next();
-
-      for (Vehicle c : Vehicle.getCarArray()) {
-
-        if (c.getVin().equalsIgnoreCase(key)) {
-
-          System.out.println("Record Found");
-          System.out.printf("License Plate  " + "  Manufacturer    "
-                            + " Model    " + "    Year  " + "     Price\n");
-          System.out.printf("   %-7s\t" + "  %-10s\t" + "  %-10s" + "   %4d "
-                            + "   $%,10.2f\n", c.getVin(), c.getMake(), 
-                            c.getModel(), c.getYear(), c.getPrice());
-          return;
-        }
-      }
-      
-    System.out.println("Record Not Found.");
+  
+  public int getsearchIDNumber(Scanner in){
+	  int searchID = 0;	 
+	  boolean isInt = true;
+	  do{
+		  System.out.print(" Enter a valid ID number: ");
+		  if( in.hasNextInt()){
+		    searchID = in.nextInt();
+		    isInt = true;
+		  }
+		  else{
+			  System.out.print("Invalid entry.\n");
+			  isInt = false;			  
+			  in.next();
+		  }			  
+	  }while( !isInt );
+	  return searchID;
   }
 
   /**
    * Reads two float values input by the user, a minimum value and maximum
    * value. Then an ArrayList of type Vehicle is traversed. If objects are found
- with price values within the bounds of the values input by the user the
- objects information is printed out to the console.
+   * with price values within the bounds of the values input by the user and the
+   * objects are of a specified type per the user, the information is printed 
+   * out to the console.
    *
    * @param in reuse Scanner in object
+   * @param option specifies which Vehicle type is being searched
    */
-  public void priceRange(Scanner in) {
-    in = new Scanner(System.in);
+  public void priceRange(Scanner in, int option) {
+ 
     boolean flag = false;
     float min = 0;
     float max = 0;
@@ -162,41 +486,71 @@ public class Input {
 
         if (in.hasNextFloat()) {
           min = in.nextFloat();
-          flag = true;
         } 
-        else {
-          System.out.println("Enter a valid price.");
-          in.next();
+        
+        if (min >= 0) {
+          flag = true;
         }
     } while (!(flag));
 
     flag = false;
-    in = new Scanner(System.in);
 
     do {
-      System.out.print("Enter a maximum price: ");
+      System.out.print("Enter a maximum price (greater than the minimum): ");
 
         if (in.hasNextFloat()) {
           max = in.nextFloat();
-          flag = true;
         } 
-        else {
-          System.out.println("Enter a valid price.");
-          in.next();
+        
+        if (max > min) {
+          flag = true;
         }
     } while (!(flag));
-
-    System.out.printf("License Plate  " + "  Manufacturer    "
-                      + " Model    " + "    Year  " + "     Price\n");
-
-    for (Vehicle c : Vehicle.getCarArray()) {
-
-      if (c.getPrice() >= min && c.getPrice() <= max) {
-
-        System.out.printf("   %-7s\t" + "  %-10s\t" + "  %-10s" + "   %4d "
-                          + "   $%,10.2f\n", c.getVin(), c.getMake(), 
-                          c.getModel(), c.getYear(), c.getPrice());
+    
+    System.out.printf("VIN Number  " + "  Manufacturer    " + " Model     " 
+                      + "   Year  " + "     Price " + "        Mileage    \n");
+    
+    if (option == '1') {
+      for (Vehicle c : Vehicle.getVehicleArray()) {
+        
+        if (c.getClass().equals(Car.class) && 
+            c.getPrice() >= min && c.getPrice() <= max) {
+          
+          System.out.printf("  %-5s        " + "%-10s     " + " %-10s" 
+                            + "   %4d " + "   $%,10.2f" + "      %-6d\n", 
+                            c.getVin(), c.getMake(), c.getModel(), 
+                            c.getYear(), c.getPrice(), c.getMileage());
+        }
       }
-    }
+    } else if (option == '2') {
+        for (Vehicle t : Vehicle.getVehicleArray()) {
+        
+          if (t.getClass().equals(Truck.class) && 
+              t.getPrice() >= min && t.getPrice() <= max) {
+          
+            System.out.printf("  %-5s        " + "%-10s     " + " %-10s" 
+                              + "   %4d " + "   $%,10.2f" + "      %-6d\n", 
+                              t.getVin(), t.getMake(), t.getModel(), 
+                              t.getYear(), t.getPrice(), t.getMileage());
+          }
+        } 
+    } else if (option == '3') {
+        for (Vehicle m : Vehicle.getVehicleArray()) {
+        
+          if (m.getClass().equals(Motorcycle.class) && 
+              m.getPrice() >= min && m.getPrice() <= max) {
+          
+            System.out.printf("  %-5s        " + "%-10s     " + " %-10s" 
+                              + "   %4d " + "   $%,10.2f" + "      %-6d\n", 
+                              m.getVin(), m.getMake(), m.getModel(), 
+                              m.getYear(), m.getPrice(), m.getMileage());
+          }
+        }
+      }
+  }
+
+    
+  public void sellVehicle () {
+    
   }
 }

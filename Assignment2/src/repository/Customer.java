@@ -6,6 +6,8 @@
 
 package repository;
 
+import java.util.Scanner;
+
 /**
  *
  * @author fhj
@@ -36,8 +38,5 @@ public class Customer extends User {
 
   public void setDriverLicense(int driverLicense) {
     this.driverLicense = driverLicense;
-  }
-  
-  
-  
+  }  
 }

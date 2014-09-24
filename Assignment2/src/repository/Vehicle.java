@@ -1,21 +1,17 @@
 package repository;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.io.PrintWriter;
-import java.lang.Object;
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+import java.io.Serializable;
 
 /**
  * The class Vehicle holds certain information about the vehicle such as its license plate number, make,
  model, year, and price.
  * @author Fernando Herrera and Leah Weiland
  */
-public class Vehicle {
+public class Vehicle implements Serializable {
 
   /**
   * This vehicle's VIN plate number.
@@ -50,24 +46,28 @@ public class Vehicle {
   /**
    * ArrayList of type Vehicle.
    */  
-  private static ArrayList<Vehicle> carArray = new ArrayList<>();
+  private static ArrayList<Vehicle> vehicleArray = new ArrayList<>();
     
   /**
    * Returns the ArrayList object of type Vehicle
    * @return this ArrayList of type Vehicle
    */  
-  public static ArrayList<Vehicle> getCarArray() {
-    return carArray;
+  public static ArrayList<Vehicle> getVehicleArray() {
+    return vehicleArray;
   }
   
   /**
    * Returns the VIN number represented by this Vehicle object.
-   * @return this object's license plate number
+   * @return this object's VIN number
    */
   public String getVin() {
     return vin;
   }
 
+  /**
+   * Returns the mileage represented by this Vehicle object.
+   * @return this object's mileage
+   */
   public int getMileage() {
     return mileage;
   }
@@ -103,70 +103,94 @@ public class Vehicle {
   public float getPrice() {
     return price;
   }
-    
+
   /**
-   * Creates a temporary object of type Vehicle, setting the values with the given parameters.
-   * @param carVin  the Vehicle license plate number.
-   * @param carMake  the make of the Vehicle.
-   * @param carModel  the model of the Vehicle.
-   * @param carYear  the year of the Vehicle.
-   * @param carPrice  the price of the Vehicle.
+   * Sets the VIN number passed from the user input.
+   * @param vin this object's VIN number
    */
-  public void addToArray ( String carVin, String carMake, String carModel, 
-    int carYear, float carPrice) {
-    
-    Vehicle temp = new Vehicle ();
-    
-    temp.vin = carVin;
-    temp.make  = carMake;
-    temp.model = carModel;
-    temp.year  = carYear;
-    temp.price = carPrice;
-    
-    carArray.add( temp );
-  }
-    
-  /**
-   *  Prints to the console the attributes of type Vehicle stored in an ArrayList.
-   */
-    
-  public void printRecords () { 
-    int i = 0;
-    
-    System.out.printf( "Record  " + "License Plate  " + "  Manufacturer    "  
-                      + " Model    " + "    Year  " + "     Price\n" );
-        
-      for ( Vehicle c : Vehicle.getCarArray() ) {
-        System.out.printf( "  %d   \t", ++i );
-        System.out.printf( "   %-7s\t" + "  %-10s\t" + "  %-10s" + "   %4d " 
-                          + "   $%,10.2f\n", c.getVin(), c.getMake(), 
-                          c.getModel(), c.getYear(), c.getPrice() );
-      }      
-  }
-    
-  /**
-   * Writes data stored in ArrayList to file "cars.txt"
-   * @throws Exception - file not found exception
-   */
-    
-  public void saveData () throws Exception {
-        
-    try (PrintWriter outFile = new PrintWriter("cars.txt")) {
-      for ( Vehicle c : Vehicle.getCarArray() ) {
-        outFile.println(c);
-      }
-            
-      System.out.print("Data saved.\n");
-    }
+  public void setVin(String vin) {
+    this.vin = vin;
   }
 
+  /**
+   * Sets the make passed from the user input
+   * @param make this object's make
+   */
+  public void setMake(String make) {
+    this.make = make;
+  }
+
+  /**
+   * Sets the model passed from the user input
+   * @param model this object's model
+   */
+  public void setModel(String model) {
+    this.model = model;
+  }
+
+  /**
+   * Sets the year passed from the user input
+   * @param year this object's year
+   */
+  public void setYear(int year) {
+    this.year = year;
+  }
+
+  /**
+   * Sets the mileage passed from the user input
+   * @param mileage this object's mileage
+   */
+  public void setMileage(int mileage) {
+    this.mileage = mileage;
+  }
+
+  /**
+   * Sets the price passed from the user input
+   * @param price this object's price
+   */
+  public void setPrice(float price) {
+    this.price = price;
+  }
+  
+  /**
+   * This method adds an object of type Vehicle to the Vehicle Array
+   * @param temp the object to be added to the Vehicle Array
+   */
+  public void addToVehicleArray (Vehicle temp) {
+    vehicleArray.add(temp);
+  }
+  
+  /**
+   * Writes data stored in ArrayList to file "dealership.txt"
+   * @throws Exception - file not found exception
+   */
+  public void saveData () throws Exception {
+     
+    try {
+      FileOutputStream fileOut = new FileOutputStream("dealership.txt");
+      ObjectOutputStream out = new ObjectOutputStream(fileOut);
+      
+      for ( Vehicle c : Vehicle.getVehicleArray() ) {
+        out.writeObject(c);
+      }
+      
+      fileOut.close();
+      
+    } catch (IOException ioException) {
+      System.err.println("Error opening file. Terminating." + ioException);
+      System.exit(1); 
+    }
+   
+    System.out.print("Data saved.\n");
+  }
+  
   /**
    * Converts and returns this Vehicle object to a formatted String.
    * @return a String representation of this Vehicle.
    */
-    
   @Override
   public String toString () {
-    return ( vin + " " + make + " " + model + " " + year + " " + price );   
+    return ( "  " + vin + "        " + make + "            " + model + "       " 
+            + year + "    " + price + "     " +  mileage +  "      \n");   
   }
 }
