@@ -634,72 +634,7 @@ public class Input {
 	    	System.out.printf("Invalid entry.", choice);
 	    	
 	    }
-	    }while(choice != 6);
+	    }while(choice != '6');
 	  	
 	  }
-    
-      
-    
-    /*
-    switch (option) {
-      case '1':
-        carSearch (min, max);
-        break;
-      case '2':
-        truckSearch (min, max);
-        break;
-      case '3':
-        bikeSearch (min, max);
-        break;
-      default:
-        break;
-    }
-  }
-  
-  public void carSearch (float min, float max) {
-    System.out.printf("VIN Number  " + "  Manufacturer    " + " Model     " 
-                      + " Year  " + "  Price " + "    Mileage    " + "\n");
-
-    for (Car c : Car.getCarArray()) {
-
-      if (c.getPrice() >= min && c.getPrice() <= max) {
-
-        System.out.printf("  %-7s\t" + "%-10s\t" + " %-10s" + "  %4d "
-                          + "     $%,10.2f\n", c.getVin(), c.getMake(), 
-                          c.getModel(), c.getYear(), c.getPrice(), c.getMileage());
-      }
-    }
-  }
-  
-  
-  public void truckSearch (float min, float max) {
-    System.out.printf("VIN Number  " + "  Manufacturer    " + " Model     " 
-                      + " Year  " + "  Price " + "    Mileage    " + "\n");
-
-    for (Truck t : Truck.getTruckArray()) {
-
-      if (t.getPrice() >= min && t.getPrice() <= max) {
-
-        System.out.printf("  %-7s\t" + "%-10s\t" + " %-10s" + "  %4d "
-                          + "     $%,10.2f\n", t.getVin(), t.getMake(), 
-                          t.getModel(), t.getYear(), t.getPrice(), t.getMileage());
-      }
-    }
-  }
-  
-  public void bikeSearch (float min, float max) {
-    System.out.printf("VIN Number  " + "  Manufacturer    " + " Model     " 
-                      + " Year  " + "  Price " + "    Mileage    " + "\n");
-
-    for (Motorcycle m : Motorcycle.getMotorcycleArray()) {
-
-      if (m.getPrice() >= min && m.getPrice() <= max) {
-
-        System.out.printf("  %-7s\t" + "%-10s\t" + " %-10s" + "  %4d "
-                          + "     $%,10.2f\n", m.getVin(), m.getMake(), 
-                          m.getModel(), m.getYear(), m.getPrice(), m.getMileage());
-      }
-    }
-  }
-        */
 }
