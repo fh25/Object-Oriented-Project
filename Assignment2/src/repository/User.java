@@ -106,6 +106,5 @@ public void addEmployeeToEmployeeArray(Employee e){
 	  System.out.printf("ID" + "  First" + "          Last" + "           DL Number" + "              Phone\n");
   }
   
-  
 }
 
