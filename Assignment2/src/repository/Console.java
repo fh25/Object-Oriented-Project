@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintStream;
+import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -149,8 +150,8 @@ public class Console {
               input.addEmployeeUserRecord(in);
               break;
             case '2':
-              Input customer = new Input();
-              customer.addCustomerUserRecord(in);
+              //Input customer = new Input();
+              input.addCustomerUserRecord(in);
               break;
             case '3':
               break;
@@ -162,7 +163,8 @@ public class Console {
         case '6':  
           
           break;
-        case '7':
+        case '7':        	
+        		user.printUserArray();
           break;
         case '8':
           break;

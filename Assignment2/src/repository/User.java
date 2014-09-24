@@ -66,4 +66,11 @@ public class User {
 	  userArray.add(c);
   }
   
+  public void printUserArray(){
+	  for( int i = 0; i < userArray.size(); ++i ){
+		  System.out.println(userArray.get(i) );
+		  System.out.print('\n');
+	  }
+  }
+  
 }

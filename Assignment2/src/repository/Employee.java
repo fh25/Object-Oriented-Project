@@ -52,21 +52,8 @@ public class Employee extends User {
 
   public void setAccountNumber(int accountNumber) {
     this.accountNumber = accountNumber;
-  }
-  
-  public void addEmployeeRecord(int id, String firstName, String lastName, float salary, int bankAccount){
-	  
-	  Employee temp = new Employee();	  
-	  
-	  temp.setId(id);
-	  temp.setFirstName(firstName);
-	  temp.setLastName(lastName);
-	  temp.accountNumber = bankAccount;
-	  temp.salary = salary;
-	 
-	  temp.addEmployeeToArray(temp);
-  }
-  
+  }  
+   
 }
 
 

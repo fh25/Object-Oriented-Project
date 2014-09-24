@@ -310,32 +310,23 @@ public class Input {
    * @param in Scanner for user input
    */
   public void addEmployeeUserRecord(Scanner in){    
-    in = new Scanner(System.in);
-	Employee temp  = new Employee();
-	int identificationNum = 0;
-	String firstName = "";
-	String lastName = "";
-	float salary = 0;
-	int bankAccount = 0;	
+  
+	Employee e  = new Employee();	
 	
-	identificationNum = Console.incrementCounter();
-	//try
-	//{
+	e.setId(Console.incrementCounter());
+	
 	System.out.print("Enter the employee's first name: ");	
-	firstName = in.next();
-	//}catch(IOException ){
-	  // in.hasNext();
-	//}
+	e.setFirstName(in.next());
 	
-
 	System.out.print("Enter the employee's last name: ");		
-	lastName = in.next();
+	e.setLastName(in.next());
+	
 	boolean match = true;
 	
 	do {
 		System.out.print("Enter the employee's salary: ");
 		if (in.hasNextFloat()) {
-			salary = in.nextFloat();
+			e.setSalary(in.nextFloat());
 			match = true;
 		}
 		else
@@ -353,7 +344,7 @@ public class Input {
 	System.out.print("Enter the employee's direct deposit bank account number: ");
 	if(in.hasNextInt())
 	{
-	bankAccount = in.nextInt();
+	e.setAccountNumber(in.nextInt());
 	match1 = true;
 	}
 	else
@@ -364,9 +355,9 @@ public class Input {
 	}
 	}while(!match1);
 	
-	temp.addEmployeeRecord(identificationNum, firstName, lastName, salary, bankAccount);	
-	
+	e.addEmployeeToArray(e);	
   }
+  
   /**
    * Creates a temporary object of the type Customer and sets its attributes to values input
    * by the user. It then calls a methof of the class Customer to add the object to an 
@@ -374,28 +365,22 @@ public class Input {
    * @param in
    */
   public void addCustomerUserRecord(Scanner in){
-	    in = new Scanner(System.in);
-		Customer c = new Customer();
-		int identificationNum = 0;
-		String firstName = "";
-		String lastName = "";
-		String phoneNumber = "";
-		int driversLicense = 0;
-		boolean match = true;
+	    boolean match = true;
+		Customer c = new Customer();		
 		
-		identificationNum = Console.incrementCounter();
+		c.setId(Console.incrementCounter()); 
 		System.out.print("Enter the customer's first name: ");
-		firstName = in.next();
+		c.setFirstName(in.next());
 		
 		System.out.print("Enter the customer's last name: ");
-		lastName = in.next();
+		c.setLastName(in.next());
 		
 		do
 		{		
 		System.out.print("Enter the customer's phone number: ");
 		if( in.hasNext())
 		{
-			phoneNumber = in.next();
+			c.setPhoneNumber(in.next());
 			match = true;
 		}
 		else
@@ -413,7 +398,7 @@ public class Input {
 		System.out.print("Enter the customer's drivers license number: ");
 		if(in.hasNextInt())
 		{
-		driversLicense = in.nextInt();
+		c.setDriverLicense(in.nextInt());
 		match = true;
 		}
 		else
@@ -424,9 +409,8 @@ public class Input {
 		}
 		}while(!match);
 		
-		c.addCustomerRecord(identificationNum, firstName, lastName, driversLicense, phoneNumber);
+		c.addCustomerToArray(c);	
 		
-		//in.close();
 	  }
 
   /**
