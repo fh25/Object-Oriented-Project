@@ -641,5 +641,8 @@ public class Input {
 	  	
 	  }
     
+  
+  public void sellVehicle () {
     
+  }
 }
