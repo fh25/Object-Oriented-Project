@@ -355,7 +355,7 @@ public class Input {
 	}
 	}while(!match1);
 	
-	e.addEmployeeToArray(e);	
+	e.addEmployeeToEmployeeArray(e);	
   }
   
   /**
@@ -409,7 +409,7 @@ public class Input {
 		}
 		}while(!match);
 		
-		c.addCustomerToArray(c);	
+		c.addCustomerToCustomerArray(c);	
 		
 	  }
 

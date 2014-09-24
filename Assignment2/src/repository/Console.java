@@ -163,8 +163,9 @@ public class Console {
         case '6':  
           
           break;
-        case '7':        	
-        		user.printUserArray();
+        case '7':
+        		user.printUserArrayHeader();
+        		user.printUserEmployeeArray();
           break;
         case '8':
           break;
