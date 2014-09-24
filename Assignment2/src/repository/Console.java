@@ -134,7 +134,24 @@ public class Console {
           bike.printMotorcycle();
           break;
         case '4':  
-          input.priceRange( in );
+          do {
+            option = vehicleChoice (in);
+            switch (option) {
+              case '1': 
+                input.priceRange(in, option);
+                break;
+              case '2':
+                input.priceRange(in, option);
+                break;
+              case '3':
+                input.priceRange(in, option); 
+                break;
+              case '4':
+                break;
+              default : 
+                System.out.printf("Not a valid option%n", option);
+            }
+          } while (option != '4');
           break;
         case '5':  
           do {
@@ -209,8 +226,8 @@ public class Console {
   }
   
   public static int vehicleChoice(Scanner in) {
-    in = new Scanner(System.in);
-    System.out.print("\nChoose Vehicle Type To Add: \n"
+  
+    System.out.print("\nChoose Vehicle Type: \n"
                      + "\t1. Car\n"
                      + "\t2. Truck\n"
                      + "\t3. Motorcycle\n"

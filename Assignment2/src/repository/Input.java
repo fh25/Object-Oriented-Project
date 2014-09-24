@@ -422,25 +422,50 @@ public class Input {
    * Deletes an object from ArrayList of type Vehicle.
    *
    * @param in reuse Scanner in object
-   * @param temp reuse Vehicle object temp
    */
   public void deleteRecord(Scanner in) {
 
-    int i = 0;
+    int i = 0,
+        j = 0,
+        k = 0;
 
     System.out.print("Enter VIN # to delete record: ");
     String key = in.next();
 
-    for (Vehicle c : Vehicle.getVehicleArray()) {
+    for (Car c : Car.getCarArray()) {
 
       if (c.getVin().equalsIgnoreCase(key)) {
-        Vehicle.getVehicleArray().remove(i);
+        Car.getCarArray().remove(i);
         System.out.printf("Record containing VIN # %s removed.", key);
         System.out.print("\n");
         return;
       }
       
       ++i;
+    }
+    
+    for (Truck t : Truck.getTruckArray()) {
+
+      if (t.getVin().equalsIgnoreCase(key)) {
+        Truck.getTruckArray().remove(i);
+        System.out.printf("Record containing VIN # %s removed.", key);
+        System.out.print("\n");
+        return;
+      }
+      
+      ++j;
+    }
+    
+    for (Motorcycle m : Motorcycle.getMotorcycleArray()) {
+
+      if (m.getVin().equalsIgnoreCase(key)) {
+        Motorcycle.getMotorcycleArray().remove(i);
+        System.out.printf("Record containing VIN # %s removed.", key);
+        System.out.print("\n");
+        return;
+      }
+      
+      ++k;
     }
     
     System.out.printf("Record with VIN # %s Not Found.\n", key);
@@ -454,7 +479,7 @@ public class Input {
    *
    * @param in reuse Scanner in object
    */
-  public void priceRange(Scanner in) {
+  public void priceRange(Scanner in, int option) {
  
     boolean flag = false;
     float min = 0;
@@ -485,17 +510,63 @@ public class Input {
           in.next();
         }
     } while (!(flag));
-
+    
+    switch (option) {
+      case '1':
+        carSearch (min, max);
+        break;
+      case '2':
+        truckSearch (min, max);
+        break;
+      case '3':
+        bikeSearch (min, max);
+        break;
+      default:
+        break;
+    }
+  }
+  
+  public void carSearch (float min, float max) {
     System.out.printf("VIN Number  " + "  Manufacturer    " + " Model     " 
                       + " Year  " + "  Price " + "    Mileage    " + "\n");
 
-    for (Vehicle c : Vehicle.getVehicleArray()) {
+    for (Car c : Car.getCarArray()) {
 
       if (c.getPrice() >= min && c.getPrice() <= max) {
 
         System.out.printf("  %-7s\t" + "%-10s\t" + " %-10s" + "  %4d "
                           + "     $%,10.2f\n", c.getVin(), c.getMake(), 
                           c.getModel(), c.getYear(), c.getPrice(), c.getMileage());
+      }
+    }
+  }
+  
+  public void truckSearch (float min, float max) {
+    System.out.printf("VIN Number  " + "  Manufacturer    " + " Model     " 
+                      + " Year  " + "  Price " + "    Mileage    " + "\n");
+
+    for (Truck t : Truck.getTruckArray()) {
+
+      if (t.getPrice() >= min && t.getPrice() <= max) {
+
+        System.out.printf("  %-7s\t" + "%-10s\t" + " %-10s" + "  %4d "
+                          + "     $%,10.2f\n", t.getVin(), t.getMake(), 
+                          t.getModel(), t.getYear(), t.getPrice(), t.getMileage());
+      }
+    }
+  }
+  
+  public void bikeSearch (float min, float max) {
+    System.out.printf("VIN Number  " + "  Manufacturer    " + " Model     " 
+                      + " Year  " + "  Price " + "    Mileage    " + "\n");
+
+    for (Motorcycle m : Motorcycle.getMotorcycleArray()) {
+
+      if (m.getPrice() >= min && m.getPrice() <= max) {
+
+        System.out.printf("  %-7s\t" + "%-10s\t" + " %-10s" + "  %4d "
+                          + "     $%,10.2f\n", m.getVin(), m.getMake(), 
+                          m.getModel(), m.getYear(), m.getPrice(), m.getMileage());
       }
     }
   }
