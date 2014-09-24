@@ -164,8 +164,12 @@ public class Console {
           
           break;
         case '7':
+        		System.out.print("Employees:\n");
         		user.printUserArrayHeader();
         		user.printUserEmployeeArray();
+        		System.out.print("\nCustomers:\n");
+        		user.printUserCustomerHeader();
+        		user.printUserCustomerArray();
           break;
         case '8':
           break;
