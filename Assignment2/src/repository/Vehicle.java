@@ -162,7 +162,6 @@ public class Vehicle implements Serializable {
     System.out.print("Data saved.\n");
   }
   
-
   /**
    * Converts and returns this Vehicle object to a formatted String.
    * @return a String representation of this Vehicle.
@@ -171,5 +170,9 @@ public class Vehicle implements Serializable {
   public String toString () {
     return ( "  " + vin + "        " + make + "            " + model + "       " 
             + year + "    " + price + "     " +  mileage +  "      \n");   
+  }
+  
+  public void comparison () {
+    
   }
 }

@@ -296,8 +296,9 @@ public class Console {
     try {
       while (true) {
         Vehicle v = (Vehicle) inFile.readObject();
-        //v.addObject(v);
+        v.addToVehicleArray(v);
         System.out.println(v); //printing for test purposes 
+        v.comparison();
       }
     } 
     catch (ClassNotFoundException classNotFound) {
@@ -315,35 +316,6 @@ public class Console {
       }
     } catch (IOException e) {
       System.err.println("Error closing file. Terminating." + e);
-      System.exit(1);
-    }
-  }
-  
-  public static void openOutFile() {
-    try {
-      out = new ObjectOutputStream(new FileOutputStream("dealership.txt")); 
-      
-    } catch (IOException e) {
-      System.err.println("Error opening file." + e);
-    }
-  }
-  
-  public static void writeFile() throws ClassNotFoundException {
-    for ( Vehicle c : Vehicle.getVehicleArray() ) {
-      try {
-        out.writeObject(c);
-      } catch (IOException ex) {
-        System.err.println("Error writing to file. " + ex);
-      }
-    }
-  }
-  
-  public static void closeOutFile() {
-    try {
-      if (out != null)
-        out.close();
-    } catch (IOException e) {
-      System.err.println("Error closing file. Terminating. " + e);
       System.exit(1);
     }
   }
