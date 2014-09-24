@@ -1,23 +1,10 @@
 package repository;
 
-import java.io.EOFException;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintStream;
-import java.io.ObjectInputStream.GetField;
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  * Class Console creates a menu for a car repository. 
@@ -29,11 +16,6 @@ public class Console {
    * @ObjectInputStream used to read from a file
    */
   private static ObjectInputStream inFile;
-  
-  /**
-   * @ObjectOutputStream used to write to a file
-   */
-  private static ObjectOutputStream out;
 
   /**
 	 * variable to keep track of how many users there are in the system
@@ -46,9 +28,20 @@ public class Console {
    * @throws Exception
    */ 
   public static void main (String[] args) throws Exception {   	 
-   
+    
+    /**
+     * Opens a file for reading.
+     */
     openInFile();
+    
+    /**
+     * Reads a file.
+     */
     readFile();
+    
+    /**
+     * Closes file.
+     */
     closeInFile();
 
     /**
@@ -168,107 +161,11 @@ public class Console {
             default :
               System.out.printf(" Not a valid option%n", option);
             }       	  
-          }while (option != '3');
+          } while (option != '3');
           break;
 //**********************************CASE6  PART 1 START****************************************
         case '6':  
-        		option = updateUser(in);
-        		switch(option){
-        		case '1':
-        		  int idE = input.getsearchIDNumber(in);
-        		  int found = findUserEmployee(in, idE);
-        		  if(found == -1 )
-        			  break;
-        		  else
-        		  {
-        			  Employee e = new Employee(); 
-        			  e = User.getUserArrayEmployee().get(found);
-        			  
-        		  do{   
-        			    option = updateEmployeeMenu(in);
-        			    //option = in.nextInt(); 
-        			    //System.out.print("Choice: " + option + "\n");
-        			    switch(option)
-        			    {
-        			    case '1' :
-        			    	System.out.print("Enter new ID number: " );
-        			    	int id = in.nextInt();        			    	
-        			    	e.setId(id);
-        			    	break;
-        			    case '2': 
-        			    	System.out.print("Enter first name: ");
-        			    	
-        			    	e.setFirstName(in.next());
-        			    	break;
-        			    case '3':
-        			    	System.out.print("Enter last name: ");
-        			    	e.setLastName(in.next());
-        			    	break;
-        			    case '4':
-        			    	System.out.print("Enter salary: ");
-        			    	e.setSalary(in.nextFloat());
-        			    	break;
-        			    case '5':
-        			    	System.out.print("Enter bank account number: ");
-        			    	e.setAccountNumber(in.nextInt());
-        			    	break;
-        			    case '6':
-        			    	break;
-        			    default:
-        			    	System.out.printf(" Not a valid option%n", choice);  
-        			    }
-        			    }while(choice != '6');
-        		  }
-        		  break;
-//*******************************************CASE 6 PART2**************************        		  
-        		case '2':
-        		  int idC = input.getsearchIDNumber(in);
-        		  found = findUserCustomer(in, idC);
-        		  if(found == -1 )
-        			  break;
-        		  else
-        		  {
-        			  Customer c = new Customer(); 
-        			  c = User.getUserArrayCustomer().get(found);
-        			  do{
-        				  option = updateCustomerMenu(in);
-        				  
-        				  switch(option)
-        				    {
-        				    case '1':
-        				    	System.out.print("Enter new ID number: " );
-        				    	c.setId(in.nextInt());
-        				    	break;
-        				    case '2': 
-        				    	System.out.print("Enter first name: ");
-        				    	c.setFirstName(in.next());
-        				    	break;
-        				    case '3':
-        				    	System.out.print("Enter last name: ");
-        				    	c.setLastName(in.next());
-        				    	break;
-        				    case '4':
-        				    	System.out.print("Enter drivers license number: ");
-        				    	c.setDriverLicense(in.nextInt());
-        				    	break;
-        				    case '5':
-        				    	System.out.print("Enter phone number: ");
-        				    	c.setPhoneNumber(in.next());
-        				    	break;
-        				    case '6':
-        				    	break;
-        				    default:
-        				    	System.out.printf("Invalid entry.", choice);
-        				    }
-        			  	}while(choice != '6');        			  
-        		  }
-        		  break;
-        		case'3':
-        		  break;
-        		default :
-        		  System.out.printf("Not a valid option", option);
-        		}
-          
+        		
           break;
         case '7':
         		System.out.print("Employees:\n");
@@ -312,7 +209,7 @@ public class Console {
    * @return user input read by Scanner, an integer value between 1 and 6
    */
   public static int userChoice(Scanner in) {
-    in = new Scanner(System.in);
+
     System.out.print("Your choice: ");
 
     char command = in.next().charAt(0);
@@ -320,8 +217,11 @@ public class Console {
     return command;
   }
   
-  
-  
+  /**
+   * Returns integer value read by Scanner
+   * @param in reusing Scanner in object
+   * @return user input read by Scanner, an integer value between 1 and 4
+   */
   public static int vehicleChoice(Scanner in) {
   
     System.out.print("\nChoose Vehicle Type: \n"
@@ -336,8 +236,13 @@ public class Console {
     return selection;
   }
   
+  /**
+   * Returns integer value read by Scanner
+   * @param in reusing Scanner in object
+   * @return user input read by Scanner, an integer value between 1 and 3
+   */
   public static int addUserChoice(Scanner in){
-	  in = new Scanner(System.in);
+	  
 	  System.out.print("\nChoose a user type to add to the database: \n"
 			  		   + "\t1. Employee \n"
 			  		   + "\t2. Customer \n"
@@ -349,7 +254,13 @@ public class Console {
 	  return selection;
   }
   
+  /**
+   * Returns an integer value read by Scanner
+   * @param in reusing Scanner in object
+   * @return user input read by Scanner, an integer value between 1 and 3
+   */
   public static int updateUser(Scanner in){
+    
 	  System.out.print("\nSelect which type of user to update: \n"
 			           + "\t1. Employee \n"
 			  		   + "\t2. Customer \n"
@@ -360,6 +271,10 @@ public class Console {
 	  return selection;
   }
   
+
+  /**
+   * This method opens a file "dealership.txt" for reading.
+   */
   public static int updateEmployeeMenu(Scanner in){	
 			
 		    System.out.print("Select a field to update:\n "
@@ -388,6 +303,7 @@ public class Console {
 	    return selection;
   }
   
+
   public static void openInFile() {
     try {
       inFile = new ObjectInputStream(new FileInputStream("dealership.txt")); 
@@ -395,10 +311,14 @@ public class Console {
     } catch (IOException e) {
       System.out.println("Try adding data then exit using menu option 9 to "
                          + "create file. " + e);
-      
     }
   }
   
+  /**
+   * This method first checks if there is data to be read from a file. If so,
+   * the data is read as Serialized objects until an End Of File is reached. 
+   * The read data is then populated to Vehicle Array using a for-each loop. 
+   */
   public static void readFile() {
     
     if (inFile == null) {
@@ -409,8 +329,6 @@ public class Console {
       while (true) {
         Vehicle v = (Vehicle) inFile.readObject();
         v.addToVehicleArray(v);
-        System.out.println(v); //printing for test purposes 
-        v.comparison();
       }
     } 
     catch (ClassNotFoundException classNotFound) {
@@ -421,6 +339,9 @@ public class Console {
     }
   }
   
+  /**
+   * This method closes the open input file
+   */
   public static void closeInFile() {
     try {
       if (inFile != null) {
@@ -432,26 +353,13 @@ public class Console {
     }
   }
   
+  /**
+   * Returns an integer value representing the added Users
+   * @return userCounter
+   */
   public static int incrementCounter(){
     ++userCounter;
 	return userCounter;    
-  }
-public static int findUserEmployee(Scanner in, int id){
-	  
-	  for(Employee e: User.getUserArrayEmployee()){
-	    if( id == e.getId() ){
-	      System.out.printf("ID" + "  First" + "          Last" + "           Salary" + "                Account\n");	  
-		  System.out.printf("% 2d  " +  "%-15.10s" +  "%-15.30s" + "$%,.2f" + "% 15d\n",  e.getId(), e.getFirstName(), e.getLastName(), e.getSalary(), e.getAccountNumber() );
-		  
-		  return e.getUserArrayEmployee().indexOf(e);
-	    }
-		  else
-		  {
-			  System.out.print("The ID number was not found.");
-		  }
-		  }
-	  return -1;
-		  
   }
 
 public static int findUserCustomer(Scanner in, int id){

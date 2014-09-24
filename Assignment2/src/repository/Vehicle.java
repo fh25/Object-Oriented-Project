@@ -6,12 +6,6 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.io.Serializable;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * The class Vehicle holds certain information about the vehicle such as its license plate number, make,
  model, year, and price.
@@ -61,19 +55,19 @@ public class Vehicle implements Serializable {
   public static ArrayList<Vehicle> getVehicleArray() {
     return vehicleArray;
   }
-
-  public static void setVehicleArray(ArrayList<Vehicle> vehicleArray) {
-    Vehicle.vehicleArray = vehicleArray;
-  }
   
   /**
    * Returns the VIN number represented by this Vehicle object.
-   * @return this object's license plate number
+   * @return this object's VIN number
    */
   public String getVin() {
     return vin;
   }
 
+  /**
+   * Returns the mileage represented by this Vehicle object.
+   * @return this object's mileage
+   */
   public int getMileage() {
     return mileage;
   }
@@ -110,30 +104,58 @@ public class Vehicle implements Serializable {
     return price;
   }
 
+  /**
+   * Sets the VIN number passed from the user input.
+   * @param vin this object's VIN number
+   */
   public void setVin(String vin) {
     this.vin = vin;
   }
 
+  /**
+   * Sets the make passed from the user input
+   * @param make this object's make
+   */
   public void setMake(String make) {
     this.make = make;
   }
 
+  /**
+   * Sets the model passed from the user input
+   * @param model this object's model
+   */
   public void setModel(String model) {
     this.model = model;
   }
 
+  /**
+   * Sets the year passed from the user input
+   * @param year this object's year
+   */
   public void setYear(int year) {
     this.year = year;
   }
 
+  /**
+   * Sets the mileage passed from the user input
+   * @param mileage this object's mileage
+   */
   public void setMileage(int mileage) {
     this.mileage = mileage;
   }
 
+  /**
+   * Sets the price passed from the user input
+   * @param price this object's price
+   */
   public void setPrice(float price) {
     this.price = price;
   }
   
+  /**
+   * This method adds an object of type Vehicle to the Vehicle Array
+   * @param temp the object to be added to the Vehicle Array
+   */
   public void addToVehicleArray (Vehicle temp) {
     vehicleArray.add(temp);
   }
@@ -170,9 +192,5 @@ public class Vehicle implements Serializable {
   public String toString () {
     return ( "  " + vin + "        " + make + "            " + model + "       " 
             + year + "    " + price + "     " +  mileage +  "      \n");   
-  }
-  
-  public void comparison () {
-    
   }
 }
