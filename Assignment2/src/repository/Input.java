@@ -499,4 +499,21 @@ public class Input {
       }
     }
   }
+  public int getsearchIDNumber(Scanner in){
+	  int searchID = 0;
+	  boolean isInt = true;
+	  do{
+		  System.out.print(" Enter a valid ID number: ");
+		  if( in.hasNextInt()){
+		    searchID = in.nextInt();
+		    isInt = true;
+		  }
+		  else{
+			  System.out.print("Invalid entry.\n");
+			  isInt = false;			  
+			  in.next();
+		  }			  
+	  }while( !isInt );
+	  return searchID;
+  }
 }

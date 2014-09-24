@@ -141,11 +141,9 @@ public class Console {
             option = addUserChoice(in);
             switch(option){
             case '1':              
-              //Employee temp = new Employee();
               input.addEmployeeUserRecord(in);
               break;
-            case '2':
-              //Input customer = new Input();
+            case '2':              
               input.addCustomerUserRecord(in);
               break;
             case '3':
@@ -156,6 +154,19 @@ public class Console {
           }while (option != '3');
           break;
         case '6':  
+        		option = updateUser(in);
+        		switch(option){
+        		case '1':
+        		  int id = input.getsearchIDNumber(in);
+        		  break;
+        		  
+        		case '2':
+        		  break;
+        		case'3':
+        		  break;
+        		default :
+        		  System.out.printf("Not a valid option", option);
+        		}
           
           break;
         case '7':
@@ -208,6 +219,8 @@ public class Console {
     return command;
   }
   
+  
+  
   public static int vehicleChoice(Scanner in) {
     in = new Scanner(System.in);
     System.out.print("\nChoose Vehicle Type To Add: \n"
@@ -232,6 +245,17 @@ public class Console {
 	  
 	  char selection = in.next().charAt(0);
 	 
+	  return selection;
+  }
+  
+  public static int updateUser(Scanner in){
+	  System.out.print("\nSelect which type of user to update: \n"
+			           + "\t1. Employee \n"
+			  		   + "\t2. Customer \n"
+			           + "\t3. Back to main menu. \n"
+			  		   + "Your choice: ");
+	  
+	  char selection = in.next().charAt(0);
 	  return selection;
   }
   
