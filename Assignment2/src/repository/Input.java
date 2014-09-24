@@ -548,4 +548,158 @@ public class Input {
         }
       }
   }
+  
+  public void updateEmployeeUser(Scanner in, Employee e){	
+	int choice = 0;
+    System.out.print("Select a field to update:\n "
+    				+"\t1. ID Number\n "
+    				+"\t2. First Name\n"
+    				+"\t3. Last Name\n"
+    				+"\t4. Salary\n"
+    				+"\t5. Bank Account Number\n"
+    				+"\t6. Return to main menu.\n"
+    				+"Your choice: ");    
+    
+    do{
+    choice = in.nextInt(); 
+    switch(choice)
+    {
+    case '1':
+    	System.out.print("Enter new ID number: " );
+    	e.setId(in.nextInt());
+    	break;
+    case '2': 
+    	System.out.print("Enter first name: ");
+    	e.setFirstName(in.next());
+    	break;
+    case '3':
+    	System.out.print("Enter last name: ");
+    	e.setLastName(in.next());
+    	break;
+    case '4':
+    	System.out.print("Enter salary: ");
+    	e.setSalary(in.nextFloat());
+    	break;
+    case '5':
+    	System.out.print("Enter bank account number: ");
+    	e.setAccountNumber(in.nextInt());
+    	break;
+    case '6':
+    	break;
+    default:
+    	System.out.printf("Invalid entry.%n", choice);    	
+    }
+    }while(choice != 6);
+  	
+  }
+  
+  public void updateCustomerUser(Scanner in, Customer c){
+	    
+	    System.out.print("Select a field to update:\n "
+	    				+"\t1. ID Number\n "
+	    				+"\t2. First Name\n"
+	    				+"\t3. Last Name\n"
+	    				+"\t4. Drivers License\n"
+	    				+"\t5. Phone Number\n"
+	    				+"\t6. Return to main menu.\n"
+	    				+"Your choice: ");
+	    
+	    int choice = in.nextInt();
+	    do{
+	    switch(choice)
+	    {
+	    case '1':
+	    	System.out.print("Enter new ID number: " );
+	    	c.setId(in.nextInt());
+	    	break;
+	    case '2': 
+	    	System.out.print("Enter first name: ");
+	    	c.setFirstName(in.next());
+	    	break;
+	    case '3':
+	    	System.out.print("Enter last name: ");
+	    	c.setLastName(in.next());
+	    	break;
+	    case '4':
+	    	System.out.print("Enter drivers license number: ");
+	    	c.setDriverLicense(in.nextInt());
+	    	break;
+	    case '5':
+	    	System.out.print("Enter phone number: ");
+	    	c.setPhoneNumber(in.next());
+	    	break;
+	    case '6':
+	    	break;
+	    default:
+	    	System.out.printf("Invalid entry.", choice);
+	    	
+	    }
+	    }while(choice != 6);
+	  	
+	  }
+    
+      
+    
+    /*
+    switch (option) {
+      case '1':
+        carSearch (min, max);
+        break;
+      case '2':
+        truckSearch (min, max);
+        break;
+      case '3':
+        bikeSearch (min, max);
+        break;
+      default:
+        break;
+    }
+  }
+  
+  public void carSearch (float min, float max) {
+    System.out.printf("VIN Number  " + "  Manufacturer    " + " Model     " 
+                      + " Year  " + "  Price " + "    Mileage    " + "\n");
+
+    for (Car c : Car.getCarArray()) {
+
+      if (c.getPrice() >= min && c.getPrice() <= max) {
+
+        System.out.printf("  %-7s\t" + "%-10s\t" + " %-10s" + "  %4d "
+                          + "     $%,10.2f\n", c.getVin(), c.getMake(), 
+                          c.getModel(), c.getYear(), c.getPrice(), c.getMileage());
+      }
+    }
+  }
+  
+  
+  public void truckSearch (float min, float max) {
+    System.out.printf("VIN Number  " + "  Manufacturer    " + " Model     " 
+                      + " Year  " + "  Price " + "    Mileage    " + "\n");
+
+    for (Truck t : Truck.getTruckArray()) {
+
+      if (t.getPrice() >= min && t.getPrice() <= max) {
+
+        System.out.printf("  %-7s\t" + "%-10s\t" + " %-10s" + "  %4d "
+                          + "     $%,10.2f\n", t.getVin(), t.getMake(), 
+                          t.getModel(), t.getYear(), t.getPrice(), t.getMileage());
+      }
+    }
+  }
+  
+  public void bikeSearch (float min, float max) {
+    System.out.printf("VIN Number  " + "  Manufacturer    " + " Model     " 
+                      + " Year  " + "  Price " + "    Mileage    " + "\n");
+
+    for (Motorcycle m : Motorcycle.getMotorcycleArray()) {
+
+      if (m.getPrice() >= min && m.getPrice() <= max) {
+
+        System.out.printf("  %-7s\t" + "%-10s\t" + " %-10s" + "  %4d "
+                          + "     $%,10.2f\n", m.getVin(), m.getMake(), 
+                          m.getModel(), m.getYear(), m.getPrice(), m.getMileage());
+      }
+    }
+  }
+        */
 }
