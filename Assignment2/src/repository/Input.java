@@ -365,7 +365,7 @@ public class Input {
   
   /**
    * Creates a temporary object of the type Customer and sets its attributes to values input
-   * by the user. It then calls a methof of the class Customer to add the object to an 
+   * by the user. It then calls a method of the class Customer to add the object to an 
    * ArrayList of type User.
    * @param in
    */
@@ -470,6 +470,24 @@ public class Input {
     
     System.out.printf("Record with VIN # %s Not Found.\n", key);
   }
+  
+  public int getsearchIDNumber(Scanner in){
+	  int searchID = 0;
+	  boolean isInt = true;
+	  do{
+		  System.out.print(" Enter a valid ID number: ");
+		  if( in.hasNextInt()){
+		    searchID = in.nextInt();
+		    isInt = true;
+		  }
+		  else{
+			  System.out.print("Invalid entry.\n");
+			  isInt = false;			  
+			  in.next();
+		  }			  
+	  }while( !isInt );
+	  return searchID;
+  }
 
   /**
    * Reads two float values input by the user, a minimum value and maximum
@@ -540,22 +558,7 @@ public class Input {
       }
     }
   }
-  public int getsearchIDNumber(Scanner in){
-	  int searchID = 0;
-	  boolean isInt = true;
-	  do{
-		  System.out.print(" Enter a valid ID number: ");
-		  if( in.hasNextInt()){
-		    searchID = in.nextInt();
-		    isInt = true;
-		  }
-		  else{
-			  System.out.print("Invalid entry.\n");
-			  isInt = false;			  
-			  in.next();
-		  }			  
-	  }while( !isInt );
-	  return searchID;
+  
   
   public void truckSearch (float min, float max) {
     System.out.printf("VIN Number  " + "  Manufacturer    " + " Model     " 

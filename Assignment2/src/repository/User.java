@@ -97,7 +97,7 @@ public void addEmployeeToEmployeeArray(Employee e){
 
   public void printUserCustomerArray(){
 	  for( Customer c : getUserArrayCustomer()){
-		  System.out.printf("% 2d  " +  "%-15.10s" +  "%-15.30s" + "15d" + "%-15s\n",  c.getId(), c.getFirstName(), c.getLastName(), c.getDriverLicense(), c.getPhoneNumber() );
+		  System.out.printf("% 2d  " +  "%-15.10s" +  "%-15.30s" + "%15d" + "%-15s\n",  c.getId(), c.getFirstName(), c.getLastName(), c.getDriverLicense(), c.getPhoneNumber() );
 	  }
   }
   
